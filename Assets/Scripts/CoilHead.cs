@@ -6,28 +6,37 @@ using static UnityEngine.GraphicsBuffer;
 public class CoilHead : MonsterBehavior
 {
 
-    private float _baseSpeed;
-    private float _timerFlash = 0;
+    [SerializeField] private float _baseSpeed = 200;
 
+    private float _timerFlash = 0;
     private float _timeFlashed = 3;
 
 
 
     protected override void Init()
     {
+        _stateAI = States.CHASE;
         _speed = _baseSpeed;
+
+        print(_speed.ToString());
+
     }
 
     
 
     protected override void OnPlayerEnter(Collider other)
     {
-        throw new System.NotImplementedException();
+        if (other.gameObject.tag == "Player") {
+            _toChase = other.gameObject.transform; 
+        }
     }
 
     protected override void OnPlayerExit(Collider other)
     {
-        throw new System.NotImplementedException();
+        if (other.gameObject.tag == "Player")
+        {
+            _toChase = null;
+        }
     }
 
     protected override void Player()
@@ -50,6 +59,7 @@ public class CoilHead : MonsterBehavior
     {
         _aiPath.maxSpeed = _speed;
         _aiPath.destination = _toChase.position;
+        //Debug.Log("Chase");
     }
 
     protected override void Flashed()
@@ -61,6 +71,17 @@ public class CoilHead : MonsterBehavior
             else { _stateAI = States.WALKING; }
 
             _timerFlash = 0;
+            _aiPath.maxSpeed = _speed;
         }
+    }
+
+    public override void FlashMonster()
+    {
+        _stateAI = States.FLASHED;
+        _timerFlash = 0;
+        _aiPath.maxSpeed = 0;
+
+        // DEBUG 
+        Debug.Log("Coilhead Flashed ! ");
     }
 }

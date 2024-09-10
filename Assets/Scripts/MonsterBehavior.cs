@@ -6,14 +6,15 @@ using UnityEngine;
 public abstract class MonsterBehavior : MonoBehaviour
 {
 
-    [SerializeField] protected float _speed;
+    protected float _speed;
 
     protected bool canBeControlled = false;
 
 
-    protected States _stateAI = States.CHASE;
+    protected States _stateAI = States.NONE;
     protected StatesBehavior _state = StatesBehavior.AI;
 
+    [SerializeField]
     protected Transform _toChase;
 
     protected AIPath _aiPath;
@@ -42,6 +43,8 @@ public abstract class MonsterBehavior : MonoBehaviour
     {
         _aiPath = GetComponent<AIPath>();
         _zoneDetection = transform.Find("Zone").gameObject;
+
+        Init();
     }
 
     protected abstract void Init();
@@ -82,7 +85,11 @@ public abstract class MonsterBehavior : MonoBehaviour
         }
     }
 
-   
+
+    /// <summary>
+    /// Function called when the monster is in the flashlight
+    /// </summary>
+    public abstract void FlashMonster();
 
     void OnTriggerEnter(Collider other)
     {
@@ -103,11 +110,30 @@ public abstract class MonsterBehavior : MonoBehaviour
 
     protected abstract void OnPlayerEnter(Collider other);
     protected abstract void OnPlayerExit(Collider other);
+
+    /// <summary>
+    /// Function that is called when the monster is Flashed
+    /// </summary>
     protected abstract void Flashed();
+
+    /// <summary>
+    /// Function that is called when the monster is in the chase state
+    /// </summary>
     protected abstract void Chase();
+
+    /// <summary>
+    /// Function that is called for the walking state of the AI
+    /// </summary>
     protected abstract void Walking();
+
+    /// <summary>
+    /// Function that is called for the none state of the AI
+    /// </summary>
     protected abstract void None();
 
+    /// <summary>
+    /// Function that is called when the monster is controlled (state = Player)
+    /// </summary>
     protected abstract void Player();
 
 }

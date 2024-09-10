@@ -66,7 +66,7 @@ public class Monster : MonsterBehavior
         {
             controller = GetComponent<CharacterController>();
         }
-
+        _stateAI = States.CHASE;
     }
 
 
@@ -214,7 +214,7 @@ public class Monster : MonsterBehavior
         _aiPath.destination = target.position;
     }
 
-    public void FlashMonster()
+    public override void FlashMonster()
     {
         switch (_mob)
         {
@@ -237,6 +237,7 @@ public class Monster : MonsterBehavior
                     
                     //_aiPath.destination = this.transform.position;
                     _aiPath.destination = new Vector2(-_toChase.position.x,  -_toChase.position.y);
+                    //_aiPath.destination = _aiPath.
                 }
                 break;
         }
