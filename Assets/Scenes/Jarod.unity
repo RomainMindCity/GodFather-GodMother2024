@@ -996,6 +996,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _toChase: {fileID: 1782516449}
+  _baseSpeed: 2
+  seeker: {fileID: 0}
+  radiusPatrol: 50
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
