@@ -1,24 +1,18 @@
-using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
 
-public class CoilHead : MonsterBehavior
+public class Bracken : MonsterBehavior
 {
 
+
     [SerializeField] private float _baseSpeed = 200;
+    [SerializeField] private float _angrySpeed = 300;
 
     private float _timerFlash = 0;
     private float _timeFlashed = 3;
 
-    public Seeker seeker;
-
-    [SerializeField]
-    float radiusPatrol = 10;
-
-    Path path;
+    float radiusPatrol;
 
     Vector3 _pointToGo = Vector3.zero;
 
@@ -27,20 +21,15 @@ public class CoilHead : MonsterBehavior
         _stateAI = States.NONE;
         _speed = _baseSpeed;
 
-        print(_speed.ToString());
-        seeker = GetComponent<Seeker>();
-        if (_aiPath.getPath() != null )
-        {
-            FindFurthestPointOnPath(_aiPath.getPath(), transform.position);
-        }
     }
 
-    
+
 
     protected override void OnPlayerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player") {
-            _toChase = other.gameObject.transform; 
+        if (other.gameObject.tag == "Player")
+        {
+            _toChase = other.gameObject.transform;
         }
     }
 
@@ -68,21 +57,19 @@ public class CoilHead : MonsterBehavior
     }
     protected override void Walking()
     {
+
         _aiPath.destination = _pointToGo;
-        
+
 
         if (_aiPath.reachedEndOfPath)
         {
-            _pointToGo = transform.position + RotateVector2D(new Vector3(radiusPatrol, 0, 0), Random.Range(0f,360f));
+            _pointToGo = transform.position + RotateVector2D(new Vector3(radiusPatrol, 0, 0), Random.Range(0f, 360f));
         }
     }
     protected override void Chase()
     {
-        Debug.Log("Chase ? ");
-
         _aiPath.maxSpeed = _speed;
         _aiPath.destination = _toChase.position;
-        //Debug.Log("Chase");
     }
 
     protected override void Flashed()
@@ -100,34 +87,26 @@ public class CoilHead : MonsterBehavior
 
     public override void FlashMonster(Vector3? playerPosition = null)
     {
-        _stateAI = States.FLASHED;
-        _timerFlash = 0;
-        _aiPath.maxSpeed = 0;
 
+        if (_stateAI == States.FLASHED)
+        {
+            _stateAI = States.CHASE;
+            _speed = _angrySpeed;
+            _timerFlash = 0;
+            _aiPath.maxSpeed = _speed;
+        } else
+        {
+            _stateAI = States.FLASHED;
+            _timerFlash = 0;
+            _speed = _baseSpeed;
+            _aiPath.maxSpeed = _speed;
+            _aiPath.destination = -_aiPath.destination;
+
+        }
 
 
         // DEBUG 
-        Debug.Log("Coilhead Flashed ! ");
-    }
-
-
-    Vector3 FindFurthestPointOnPath(Path path, Vector3 startPosition)
-    {
-        Vector3 furthestPoint = Vector3.zero;
-        float maxDistance = 0f;
-
-        // Iterate through the path's vector points
-        for (int i = 0; i < path.vectorPath.Count; i++)
-        {
-            float distance = Vector3.Distance(startPosition, path.vectorPath[i]);
-            if (distance > maxDistance)
-            {
-                maxDistance = distance;
-                furthestPoint = path.vectorPath[i];
-            }
-        }
-        print(furthestPoint);
-        return furthestPoint;
+        Debug.Log("Bracken Flashed ! ");
     }
 
     Vector3 RotateVector2D(Vector3 vector, float angle)
@@ -143,3 +122,5 @@ public class CoilHead : MonsterBehavior
         return new Vector3(rotatedX, rotatedY, vector.z);
     }
 }
+
+

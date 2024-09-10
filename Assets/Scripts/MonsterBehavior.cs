@@ -89,7 +89,7 @@ public abstract class MonsterBehavior : MonoBehaviour
     /// <summary>
     /// Function called when the monster is in the flashlight
     /// </summary>
-    public abstract void FlashMonster();
+    public abstract void FlashMonster(Vector3? playerPosition = null);
 
     void OnTriggerEnter(Collider other)
     {
@@ -107,6 +107,8 @@ public abstract class MonsterBehavior : MonoBehaviour
             OnPlayerExit(other);
         }
     }
+
+    
 
     protected abstract void OnPlayerEnter(Collider other);
     protected abstract void OnPlayerExit(Collider other);

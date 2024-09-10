@@ -237,6 +237,11 @@ namespace Pathfinding {
 
 		#endregion
 
+		public Path getPath()
+		{
+			return path;
+		}
+
 		/// <summary>\copydoc Pathfinding::IAstarAI::GetRemainingPath</summary>
 		public void GetRemainingPath (List<Vector3> buffer, out bool stale) {
 			buffer.Clear();

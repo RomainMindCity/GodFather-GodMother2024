@@ -214,7 +214,7 @@ public class Monster : MonsterBehavior
         _aiPath.destination = target.position;
     }
 
-    public override void FlashMonster()
+    public override void FlashMonster(Vector3? playerPosition = null)
     {
         switch (_mob)
         {
