@@ -331,7 +331,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1782516449}
-  speed: 200
+  baseSpeed: 200
+  angrySpeed: 400
+  _mob: 0
 --- !u!4 &883989181
 Transform:
   m_ObjectHideFlags: 0

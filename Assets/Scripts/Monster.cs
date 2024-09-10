@@ -6,34 +6,25 @@ using UnityEngine.InputSystem.Controls;
 
 // Diviser en 2 (CoilHead et Bracken)
 
-public class Monster : MonoBehaviour
+public class Monster : MonsterBehavior
 {
-
-    
-
-    private AIPath _aiPath;
 
     CharacterController controller;
 
     [SerializeField] private Transform target;
 
     [SerializeField]
-    float baseSpeed = 200f;
-
-    float speed = 200f;
+    float _baseSpeed = 200f;
 
     [SerializeField]
-    float angrySpeed = 400f;
+    float _angrySpeed = 400f;
 
-    States _stateAI = States.CHASE;
 
-    GameObject _zoneDetection;
 
-    private Vector2 _velocity = Vector2.zero;
 
-    StatesBehavior _state = StatesBehavior.AI;
+    [SerializeField]
+    MobType _mob = MobType.COILHEAD;
 
-    Transform _toChase;
 
     bool isChasing => _toChase != null;
     
@@ -44,21 +35,21 @@ public class Monster : MonoBehaviour
     float _timeStunned = 3;
     float _timeChasing = 5;
 
-    enum StatesBehavior
-    {
-        NONE,
-        AI,
-        PLAYER
-    }
+    //enum StatesBehavior
+    //{
+    //    NONE,
+    //    AI,
+    //    PLAYER
+    //}
 
-    enum States
-    {
-        NONE,
-        WALKING, 
-        FLASHED,
-        CHASE,
+    //enum States
+    //{
+    //    NONE,
+    //    WALKING, 
+    //    FLASHED,
+    //    CHASE,
 
-    }
+    //}
 
     enum MobType
     {
@@ -66,15 +57,11 @@ public class Monster : MonoBehaviour
         BRACKEN
     }
 
-    void Start()
+    protected override void Init()
     {
-        _aiPath = GetComponent<AIPath>();
-        _zoneDetection = transform.Find("Zone").gameObject;
-
-        //_state = StatesBehavior.NONE;
+        _speed = _baseSpeed;
 
         print("Start");
-        //controller = gameObject.AddComponent<CharacterController>();
         if (GetComponent<CharacterController>() != null)
         {
             controller = GetComponent<CharacterController>();
@@ -83,49 +70,49 @@ public class Monster : MonoBehaviour
     }
 
 
-    void Update()
-    {
+    //void Update()
+    //{
         
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (_state == StatesBehavior.PLAYER)
-            {
-                _state = StatesBehavior.AI;
-                print("Changed _state to AI");
-            }
-            else if (_state == StatesBehavior.AI) {
-                _state = StatesBehavior.PLAYER;
-                print("Changed _state to Player");
-            }
+    //    if (Input.GetKeyDown(KeyCode.P))
+    //    {
+    //        if (_state == StatesBehavior.PLAYER)
+    //        {
+    //            _state = StatesBehavior.AI;
+    //            print("Changed _state to AI");
+    //        }
+    //        else if (_state == StatesBehavior.AI) {
+    //            _state = StatesBehavior.PLAYER;
+    //            print("Changed _state to Player");
+    //        }
             
-        }
+    //    }
 
-        switch (_state)
-        {
+    //    switch (_state)
+    //    {
             
-            case StatesBehavior.NONE:
-                break;
+    //        case StatesBehavior.NONE:
+    //            break;
             
-            case StatesBehavior.AI:
-                Ai();
-                break;
+    //        case StatesBehavior.AI:
+    //            Ai();
+    //            break;
             
-            case StatesBehavior.PLAYER:
-                Player();
-                break;
+    //        case StatesBehavior.PLAYER:
+    //            Player();
+    //            break;
 
                 
-        }
+    //    }
 
-        //controller.Move(_velocity * speed  * Time.deltaTime);
-        if (controller != null && controller.enabled)
-        {
-            controller.Move(_velocity * Time.deltaTime);
-        }
+    //    //controller.Move(_velocity * speed  * Time.deltaTime);
+    //    if (controller != null && controller.enabled)
+    //    {
+    //        controller.Move(_velocity * Time.deltaTime);
+    //    }
 
-    }
+    //}
 
-    void Player()
+    protected override void Player()
     {
 
         _velocity = Vector2.zero;
@@ -151,66 +138,110 @@ public class Monster : MonoBehaviour
 
     }
 
-    void Ai()
-    {
+    //void Ai()
+    //{
 
-        switch (_stateAI)
-        {
-            case States.NONE:
-                break;
-            case States.WALKING:
-                Walking();
-                break;
-            case States.FLASHED:
-                Flashed();
-                break;
-            case States.CHASE:
-                Chase();
-                break;
-        }
+    //    switch (_stateAI)
+    //    {
+    //        case States.NONE:
+    //            break;
+    //        case States.WALKING:
+    //            Walking();
+    //            break;
+    //        case States.FLASHED:
+    //            Flashed();
+    //            break;
+    //        case States.CHASE:
+    //            Chase();
+    //            break;
+    //    }
 
-    }
+    //}
 
     // Finds a point that he can access and travels to 
 
     // Visite un point des rooms ? 
-    void Walking()
+    protected override void Walking()
     {
 
     }
-    
-    // Stunned
-    void Flashed()
-    {
-        _timer += Time.deltaTime;
-        if (_timer >= _timeStunned)
-        {
-            if (_toChase != null) { _stateAI = States.CHASE; }
-            else                  { _stateAI = States.WALKING; }
 
-            _timer = 0;
+    protected override void OnPlayerEnter(Collider other)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void OnPlayerExit(Collider other)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void None()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    // Stunned
+    protected override void Flashed()
+    {
+        switch (_mob)
+        {
+            case MobType.COILHEAD:
+                _aiPath.maxSpeed = 0;
+                _timer += Time.deltaTime;
+                if (_timer >= _timeStunned)
+                {
+                    if (_toChase != null) { _stateAI = States.CHASE; }
+                    else { _stateAI = States.WALKING; }
+
+                    _timer = 0;
+                }
+                break;
+            case MobType.BRACKEN:
+                _aiPath.maxSpeed = _speed;
+                break;
         }
+
+
     }
 
     // Chases the player
-    void Chase()
+    protected override void Chase()
     {
-        _aiPath.maxSpeed = 2;
+        _aiPath.maxSpeed = _speed;
+        //_aiPath.maxSpeed = 2;
         //Debug.Log("Chasing"); 
         _aiPath.destination = target.position;
     }
 
     public void FlashMonster()
     {
-        if (_stateAI == States.FLASHED)
+        switch (_mob)
         {
-            _stateAI = States.CHASE;
-            speed = angrySpeed;
-        } 
-        else
-        {
-            _stateAI = States.FLASHED;
+
+            case MobType.COILHEAD:
+                _stateAI = States.FLASHED;
+                _timer = 0;
+                break;
+
+            case MobType.BRACKEN:
+                if (_stateAI == States.FLASHED)
+                {
+                    _stateAI = States.CHASE;
+                    _speed = _angrySpeed;
+                }
+                else
+                {
+                    _stateAI = States.FLASHED;
+                    _speed = _baseSpeed;
+                    
+                    //_aiPath.destination = this.transform.position;
+                    _aiPath.destination = new Vector2(-_toChase.position.x,  -_toChase.position.y);
+                }
+                break;
         }
+
+
     }
 
     // When player enters the AI vision
