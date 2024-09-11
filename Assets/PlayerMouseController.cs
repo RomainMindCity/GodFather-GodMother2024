@@ -10,6 +10,7 @@ public class PlayerMouseController : MonoBehaviour
     [SerializeField] private float mouseSensitivity;
     float xRotation;
     private Coroutine coroutine;
+    private Coroutine flashCoroutine;
     void Update()
     {
         if (gameObject.GetComponentInParent<PlayerController>().CanvasManager.IsInMenu) return;
@@ -37,19 +38,23 @@ public class PlayerMouseController : MonoBehaviour
             {
                 if (hit.collider.tag != "Wall")
                 {
-                    Debug.Log(hit.collider.tag);
                     switch (hit.collider.tag)
                     {
-                        case "Bracken":
-                            hit.collider.GetComponentInParent<Bracken>().FlashMonster();
-                            break;
-                        case "CoilHead":
-                            hit.collider.GetComponentInParent<CoilHead>().FlashMonster();
-                            if (coroutine != null)
+                        case "Monster":
+                            if (hit.collider.gameObject.transform.parent.name == "Bracken") 
                             {
-                                StopCoroutine(coroutine);
+                                StartCoroutine(FlashMonster(hit.collider.gameObject));
                             }
-                            coroutine = StartCoroutine(UnflashMonster(hit.collider.gameObject));
+
+                            if (hit.collider.gameObject.transform.parent.name == "CoilHead") 
+                            {
+                                flashCoroutine = StartCoroutine(FlashMonster(hit.collider.gameObject));
+                                if (coroutine != null)
+                                {
+                                    StopCoroutine(coroutine);
+                                }
+                                coroutine = StartCoroutine(UnflashMonster(hit.collider.gameObject));
+                            }
                             break;
                         default:
                             break;
@@ -60,10 +65,22 @@ public class PlayerMouseController : MonoBehaviour
         }
     }
 
+    public Vector2 GetPlayerPosition()
+    {
+        return transform.position;
+    }
+
+    IEnumerator FlashMonster(GameObject monster)
+    {
+        yield return new WaitForSeconds(0.1f);
+        monster.GetComponentInParent<MonsterBehavior>().FlashMonster();
+    }
+
     IEnumerator UnflashMonster(GameObject monster)
     {
         yield return new WaitForSeconds(1);
         monster.GetComponentInParent<CoilHead>().UnflashMonster();
+        StopCoroutine(flashCoroutine);
     }
 
 }

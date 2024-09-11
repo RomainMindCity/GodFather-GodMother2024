@@ -10,7 +10,6 @@ public abstract class MonsterBehavior : MonoBehaviour
 
     [Header("Values GD")]
     [SerializeField] protected bool _activated = true;
-    [SerializeField] protected float _radiusDetection;
 
     protected bool _canBeControlled = false;
 
@@ -51,9 +50,6 @@ public abstract class MonsterBehavior : MonoBehaviour
     {
         _aiPath = GetComponent<AIPath>();
         _zoneDetection = transform.Find("Zone").gameObject;
-        _collider2D = GetComponent<CircleCollider2D>();
-        _collider2D.radius = _radiusDetection;
-
         Init();
     }
 
