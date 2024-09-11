@@ -5,18 +5,21 @@ using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
+
+/// <summary>
+/// Coilhead is a monster that will stop when flashed
+/// </summary>
 public class CoilHead : MonsterBehavior
 {
-
     [SerializeField] private float _baseSpeed = 200;
-
-    private float _timerFlash = 0;
-    private float _timeFlashed = 3;
 
     public Seeker seeker;
 
     [SerializeField]
     float radiusPatrol = 10;
+
+    float _timerFlash = 0;
+    float _timeFlashed = 0.5f;
 
     Path path;
 
@@ -26,6 +29,8 @@ public class CoilHead : MonsterBehavior
     {
         _stateAI = States.NONE;
         _speed = _baseSpeed;
+
+        _canBeControlled = true;
 
         print(_speed.ToString());
         seeker = GetComponent<Seeker>();
@@ -73,7 +78,28 @@ public class CoilHead : MonsterBehavior
 
     protected override void Player()
     {
-        throw new System.NotImplementedException();
+        _velocity = Vector2.zero;
+
+        // INPUTS
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            _velocity += new Vector2(-1, 0);
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            _velocity += new Vector2(1, 0);
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            _velocity += new Vector2(0, 1);
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            _velocity += new Vector2(0, -1);
+        }
+
+        transform.Translate(_velocity * _speed * Time.deltaTime);
     }
 
 
@@ -109,21 +135,21 @@ public class CoilHead : MonsterBehavior
 
     protected override void Flashed()
     {
-        _timerFlash += Time.deltaTime;
-        if (_timerFlash >= _timeFlashed)
-        {
-            if (_toChase != null) { _stateAI = States.CHASE; }
-            else { _stateAI = States.WALKING; }
+        //_timerFlash += Time.deltaTime;
+        //if (_timerFlash >= _timeFlashed)
+        //{
+        //    if (_toChase != null) { _stateAI = States.CHASE; }
+        //    else { _stateAI = States.WALKING; }
 
-            _timerFlash = 0;
-            _aiPath.maxSpeed = _speed;
-        }
+        //    _timerFlash = 0;
+        //    _aiPath.maxSpeed = _speed;
+        //}
     }
 
     public override void FlashMonster(Vector3? playerPosition = null)
     {
         _stateAI = States.FLASHED;
-        _timerFlash = 0;
+        //_timerFlash = 0;
         _aiPath.maxSpeed = 0;
 
 
@@ -132,6 +158,24 @@ public class CoilHead : MonsterBehavior
         Debug.Log("Coilhead Flashed ! ");
     }
 
+     public override void UnflashMonster()
+    {
+        StartCoroutine(_afterUnflash());
+    }
+
+    IEnumerator _afterUnflash()
+    {
+        yield return new WaitForSeconds(_timeFlashed);
+
+        if (_toChase != null)
+        {
+            _stateAI = States.CHASE;
+        }
+        else
+        {
+            _stateAI = States.WALKING;
+        }
+    }
 
     Vector3 FindFurthestPointOnPath(Path path, Vector3 startPosition)
     {

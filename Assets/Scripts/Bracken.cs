@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Bracken will just go back when flashed
+/// </summary>
 public class Bracken : MonsterBehavior
 {
 
@@ -90,7 +94,9 @@ public class Bracken : MonsterBehavior
 
     protected override void Flashed()
     {
+        Walking();
         _timerFlash += Time.deltaTime;
+        
         if (_timerFlash >= _timeFlashed)
         {
             if (_toChase != null) { _stateAI = States.CHASE; }
@@ -99,7 +105,10 @@ public class Bracken : MonsterBehavior
             _timerFlash = 0;
             _aiPath.maxSpeed = _speed;
         }
+        
     }
+
+    public override void UnflashMonster() { }
 
     public override void FlashMonster(Vector3? playerPosition = null)
     {

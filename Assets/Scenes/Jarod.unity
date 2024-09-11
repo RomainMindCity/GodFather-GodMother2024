@@ -881,6 +881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12b3a9cbb0590ed40b206ac223009381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activated: 1
   _toChase: {fileID: 0}
   _baseSpeed: 2
   _angrySpeed: 3
@@ -1213,6 +1214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a4c599d0571a248a50e6f1c2cfd581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activated: 1
   _toChase: {fileID: 1782516449}
   _baseSpeed: 2
   seeker: {fileID: 0}

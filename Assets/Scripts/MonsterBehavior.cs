@@ -8,14 +8,16 @@ public abstract class MonsterBehavior : MonoBehaviour
 
     protected float _speed;
 
-    protected bool canBeControlled = false;
+    [Header("Values GD")]
+    [SerializeField] protected bool _activated = true;
+
+    protected bool _canBeControlled = false;
 
     protected List<string> tagsWalls = new List<string> { "Wall", "Door", "Environement" };
 
     protected States _stateAI = States.NONE;
     protected StatesBehavior _state = StatesBehavior.AI;
 
-    [SerializeField]
     protected Transform _toChase;
 
     protected AIPath _aiPath;
@@ -52,6 +54,25 @@ public abstract class MonsterBehavior : MonoBehaviour
 
     void Update() 
     {
+
+        if (_canBeControlled)
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                if (_state == StatesBehavior.PLAYER)
+                {
+                    _state = StatesBehavior.AI;
+                    _aiPath.canMove = true;
+                }
+                else
+                {
+                    _state = StatesBehavior.PLAYER;
+                    _aiPath.canMove = false;
+                    transform.rotation = Quaternion.identity;
+                }
+            }
+        }
+
         switch (_state)
         {
             case StatesBehavior.NONE:
@@ -91,16 +112,11 @@ public abstract class MonsterBehavior : MonoBehaviour
     /// Function called when the monster is in the flashlight
     /// </summary>
     public abstract void FlashMonster(Vector3? playerPosition = null);
+    /// <summary>
+    /// Function you can call to unflash the monster (when the monster is out of the flashlight)
+    /// </summary>
+    public abstract void UnflashMonster();
 
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    Debug.Log("Enter");
-    //    if (other.CompareTag("Player")) {
-    //        _toChase = other.transform;
-    //        OnPlayerEnter(other);
-    //    }
-        
-    //}
 
 
     private void OnTriggerEnter2D(Collider2D collision)
