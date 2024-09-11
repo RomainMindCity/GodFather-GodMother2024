@@ -173,7 +173,7 @@ public class CoilHead : MonsterBehavior
     IEnumerator _afterUnflash()
     {
         yield return new WaitForSeconds(_timeFlashed);
-
+        _aiPath.maxSpeed = _speed;
         if (_toChase != null)
         {
             _stateAI = States.CHASE;
