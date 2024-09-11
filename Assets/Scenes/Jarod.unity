@@ -1086,6 +1086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _activated: 1
+  _radiusDetection: 0
   _needToSee: 0
   _baseSpeed: 2
   _angrySpeed: 3
@@ -1420,6 +1421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _activated: 1
+  _radiusDetection: 0
   _needToSee: 1
   _baseSpeed: 2
   seeker: {fileID: 0}
@@ -1734,8 +1736,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _activated: 1
+  _radiusDetection: 20
   _needToSee: 1
-  _timeAfterChase: 20
+  _timeAfterChase: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
