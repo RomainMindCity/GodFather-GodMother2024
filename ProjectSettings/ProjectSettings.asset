@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: GodFatherGodMother2024
+  companyName: Team14
+  productName: Don't Look Away
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -872,11 +872,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 1b947bb0-0ac4-492a-93c1-6d73e27ec767
+  cloudProjectId: 2b9d0dcf-4ccd-4aa3-a4ea-f5cb15cc042c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: GodFatherGodMother2024
-  organizationId: angels_gaming
+  projectName: Don't Look Away
+  organizationId: unity_aobbunmgsszq_g
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
