@@ -23,6 +23,7 @@ public class Interactable : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                doorsSound.Play();
                 spriteRenderer.enabled = false;
                 Collider.enabled = false;
                 detector.enabled = false;
