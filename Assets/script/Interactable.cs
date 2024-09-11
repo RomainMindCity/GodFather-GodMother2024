@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    [SerializeField]SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private AudioSource doorsSound;
     [SerializeField] Collider2D Collider;
     [SerializeField] private bool etat ;
     [SerializeField] Collider2D detector;
     void Start()
     {
+        spriteRenderer.enabled =true;
         Collider.enabled = true;
         etat = false;
     }
@@ -22,10 +23,9 @@ public class Interactable : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                spriteRenderer.enabled = false;
                 Collider.enabled = false;
                 detector.enabled = false;
-                transform.position = transform.position + new Vector3(1f, 1, 0);
-                transform.eulerAngles = transform.eulerAngles + new Vector3(0, 0, 90f);
             }
         }
     }
