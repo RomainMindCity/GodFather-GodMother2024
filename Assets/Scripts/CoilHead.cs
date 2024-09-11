@@ -180,7 +180,6 @@ public class CoilHead : MonsterBehavior
         Vector3 furthestPoint = Vector3.zero;
         float maxDistance = 0f;
 
-        // Iterate through the path's vector points
         for (int i = 0; i < path.vectorPath.Count; i++)
         {
             float distance = Vector3.Distance(startPosition, path.vectorPath[i]);

@@ -61,11 +61,11 @@ public class LoadingManager : MonoBehaviour
 
     void AnimationGoLeft(GameObject gameObject, int i, float moreSize = 0)
     {
-        float duration = 0.6f;
+        float duration = 0.3f;
 
         
         gameObject.transform.DOScale(new Vector2(1.0f, 1.0f), duration);
-        gameObject.transform.DORotate(new Vector3(0, 0, 0), 1);
+        gameObject.transform.DORotate(new Vector3(0, 0, 0), duration);
         gameObject.transform.DOMove(new Vector2(_center.transform.position.x/2f , _center.transform.position.y - (i * 20) - moreSize), duration).SetEase(Ease.OutCubic);
     
     }
@@ -80,9 +80,44 @@ public class LoadingManager : MonoBehaviour
     {
         //.SetLoops(-1) to infinite
 
-        gameObject.transform.DOScale(new Vector2(1.5f, 1.5f), 1);
-        gameObject.transform.DORotate(new Vector3(0, 0, 0), 1);
-        gameObject.transform.DOMove(new Vector2(_center.transform.position.x, _center.transform.position.y - (i * 20) - moreSize), 1).SetEase(Ease.OutCubic);
+        float duration = 0.3f;
+
+        gameObject.transform.DOScale(new Vector2(1.5f, 1.5f), duration);
+        gameObject.transform.DORotate(new Vector3(0, 0, 0), duration);
+        gameObject.transform.DOMove(new Vector2(_center.transform.position.x, _center.transform.position.y - (i * 20) - moreSize), duration).SetEase(Ease.OutCubic);
+    
+        
+    }
+
+    int i = 1;
+    void AnimationCenterCubes(GameObject gameObject)
+    {
+        foreach (Transform cube in gameObject.GetComponentsInChildren<Transform>())
+        {
+
+            int currentIndex = i;
+
+            Transform currentCube = cube;
+
+            currentCube.DORotate(new Vector3(0, 0, 360), 0.8f,RotateMode.FastBeyond360).OnComplete(() =>
+                {
+                    if (currentCube != gameObject.transform)
+                    { 
+                        if (currentIndex % 2 == 0)
+                        {
+                            currentCube.DOScale(new Vector2(1.5f,1.5f), 3f).SetLoops(-1, LoopType.Yoyo);
+                            currentCube.DORotate(new Vector3(0, 0, -360), 3.5f, RotateMode.FastBeyond360).SetLoops(-1);
+                        }
+                        else
+                        {
+                            currentCube.DORotate(new Vector3(0, 0, 360), 2.5f, RotateMode.FastBeyond360).SetLoops(-1);
+                        }
+                    }
+                });
+            
+            i++;
+            
+        }
     }
 
 
@@ -127,7 +162,8 @@ public class LoadingManager : MonoBehaviour
             if (i == _selectedButton)
             {
                 AnimationGoCenter(_listButtons[i], i);
-                AnimationGoCenter(_listButtonsBackgrounds[i], i, 30);
+                AnimationGoCenter(_listButtonsBackgrounds[i], i, 40);
+                AnimationCenterCubes(_listButtonsBackgrounds[i]);
             }
             else
             {

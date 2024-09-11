@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CanvasManager _canvasManager;
     Vector2 _moveInput;
 
+    [SerializeField] bool _canBeStopped = false; // Pour le mode endless (oui je fais chier)
+
     public CanvasManager CanvasManager { get => _canvasManager; set => _canvasManager = value; }
 
     void Start()
@@ -32,6 +34,9 @@ public class PlayerController : MonoBehaviour
 
     void PlayerMovement()
     {
+
+        if (_canBeStopped && Input.GetMouseButton(0)) { return; }
+
         Vector2 moveDirection = new Vector2(_moveInput.x, _moveInput.y).normalized;
         gameObject.transform.Translate(moveDirection * _speed * Time.deltaTime);
     }
