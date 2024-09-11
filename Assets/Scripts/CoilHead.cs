@@ -45,12 +45,12 @@ public class CoilHead : MonsterBehavior
     protected override void OnPlayerEnter(Collider2D other)
     {
 
-        //Debug.Log("Entered");
+        Debug.Log("Entered");
 
         
 
         if (other.gameObject.tag == "Player") {
-
+            
             _toChase = other.gameObject.transform;
 
             if (_needToSee && checkWalls(other))
@@ -164,9 +164,7 @@ public class CoilHead : MonsterBehavior
     IEnumerator _afterUnflash()
     {
         yield return new WaitForSeconds(_timeFlashed);
-
         _aiPath.maxSpeed = _speed;
-
         if (_toChase != null)
         {
             _stateAI = States.CHASE;

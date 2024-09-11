@@ -10,7 +10,6 @@ public abstract class MonsterBehavior : MonoBehaviour
 
     [Header("Values GD")]
     [SerializeField] protected bool _activated = true;
-    [SerializeField] protected float _radiusDetection;
 
     protected bool _canBeControlled = false;
 
