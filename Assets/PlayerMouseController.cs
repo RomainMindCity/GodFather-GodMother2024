@@ -30,14 +30,21 @@ public class PlayerMouseController : MonoBehaviour
         for (int i = 0; i < 70; i += 10)
         {
             Vector3 direction = Quaternion.Euler(0, 0, i - 30) * transform.up;
-            RaycastHit2D hit2 = Physics2D.Raycast(transform.position, direction, range);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, range);
             Debug.DrawRay(transform.position, direction * range, Color.red);
-            if (hit2.collider != null)
+            if (hit.collider != null)
             {
-                Debug.Log(hit2.collider.name);
-                if (hit2.collider.CompareTag("Monster"))
+                Debug.Log(hit.collider.name);
+                switch (hit.collider.tag)
                 {
-                    hit2.collider.GetComponent<Monster>().FlashMonster();
+                    case "Bracken":
+                        hit.collider.GetComponent<Bracken>().FlashMonster();
+                        break;
+                    case "CoilHead":
+                        hit.collider.GetComponent<CoilHead>().FlashMonster();
+                        break;
+                    default:
+                        break;
                 }
             }
         }
