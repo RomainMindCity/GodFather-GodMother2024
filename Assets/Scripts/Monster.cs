@@ -14,27 +14,15 @@ public class Monster : MonoBehaviour
     private AIPath _aiPath;
 
     CharacterController controller;
-
     [SerializeField] private Transform target;
-
-    [SerializeField]
-    float baseSpeed = 200f;
-
+    [SerializeField] private float baseSpeed = 200f;
     float speed = 200f;
-
-    [SerializeField]
-    float angrySpeed = 400f;
-
-    States _stateAI = States.CHASE;
-
+    [SerializeField] float angrySpeed = 400f;
+    [SerializeField] private States _stateAI = States.CHASE;
     GameObject _zoneDetection;
-
     private Vector2 _velocity = Vector2.zero;
-
     StatesBehavior _state = StatesBehavior.AI;
-
     Transform _toChase;
-
     bool isChasing => _toChase != null;
     
 
