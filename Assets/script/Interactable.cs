@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
+    [SerializeField]SpriteRenderer spriteRenderer;
     [SerializeField] private AudioSource doorsSound;
     [SerializeField] Collider2D Collider;
-    [SerializeField] private bool etat;
+    [SerializeField] private bool etat ;
     [SerializeField] Collider2D detector;
     void Start()
     {
         Collider.enabled = true;
         etat = false;
-        etat = detector;
     }
 
 
@@ -26,24 +26,21 @@ public class Interactable : MonoBehaviour
                 detector.enabled = false;
                 transform.position = transform.position + new Vector3(1f, 1, 0);
                 transform.eulerAngles = transform.eulerAngles + new Vector3(0, 0, 90f);
-                Debug.Log("porte ouverte");
             }
-
         }
-
     }
 
-    void OnTriggerEnter2D(Collider2D truc)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (truc.tag == "player")
+        if (collision.tag == "player")
         {
             etat = true;
         }
     }
 
-    void OnTriggerExit2D(Collider2D truc)
+    void OnTriggerExit2D(Collider2D collision)
     {
-        if (truc.tag == "player")
+        if (collision.tag == "player")
         {
             etat = false;
         }
