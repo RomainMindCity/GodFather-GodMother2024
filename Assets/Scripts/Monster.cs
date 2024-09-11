@@ -10,8 +10,15 @@ public class Monster : MonsterBehavior
 {
 
     CharacterController controller;
-
     [SerializeField] private Transform target;
+    [SerializeField] private float baseSpeed = 200f;
+    float speed = 200f;
+    [SerializeField] float angrySpeed = 400f;
+    [SerializeField] private States _stateAI = States.CHASE;
+    GameObject _zoneDetection;
+    private Vector2 _velocity = Vector2.zero;
+    StatesBehavior _state = StatesBehavior.AI;
+    Transform _toChase;
 
     [SerializeField]
     float _baseSpeed = 200f;
