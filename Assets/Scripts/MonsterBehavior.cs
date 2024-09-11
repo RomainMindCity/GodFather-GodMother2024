@@ -31,14 +31,14 @@ public abstract class MonsterBehavior : MonoBehaviour
 
     protected CircleCollider2D _collider2D;
 
-    protected enum StatesBehavior
+    public enum StatesBehavior
     {
         NONE,
         AI,
         PLAYER
     }
 
-    protected enum States
+    public enum States
     {
         NONE,
         WALKING,
@@ -51,13 +51,18 @@ public abstract class MonsterBehavior : MonoBehaviour
     {
         _aiPath = GetComponent<AIPath>();
         _zoneDetection = transform.Find("Zone").gameObject;
-        _collider2D = GetComponent<CircleCollider2D>();
-        _collider2D.radius = _radiusDetection;
+        //_collider2D = GetComponent<CircleCollider2D>();
+        //_collider2D.radius = _radiusDetection;
 
         Init();
     }
 
     protected abstract void Init();
+
+    public void ChangeStateAI(StatesBehavior newState)
+    {
+        _state = newState;
+    }
 
     void Update() 
     {

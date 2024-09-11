@@ -129,17 +129,23 @@ public class Bracken : MonsterBehavior
         {
             _stateAI = States.FLASHED;
             _timerFlash = 0;
-            _speed = _baseSpeed;
+            _speed = _angrySpeed;
             _aiPath.maxSpeed = _speed;
 
-            Vector2 vec1 = new Vector2(transform.position.x, transform.position.y);
-            Vector2 vec2 = new Vector2(_toChase.position.x, _toChase.position.y);
+            if (_toChase != null)
+            {
+                Vector2 vec1 = new Vector2(transform.position.x, transform.position.y);
+                Vector2 vec2 = new Vector2(_toChase.position.x, _toChase.position.y);
 
-            float distance = Vector2.Distance(vec1, vec2);
-
-            _aiPath.destination = -_aiPath.destination * (_distToRun / distance);
-
-        }
+                float distance = Vector2.Distance(vec1, vec2);
+             
+                _aiPath.destination = -_aiPath.destination * (_distToRun / distance);
+            }
+            else
+            {
+                _aiPath.destination = -_aiPath.destination * _distToRun / 2;
+            }
+    }
 
 
         // DEBUG 
