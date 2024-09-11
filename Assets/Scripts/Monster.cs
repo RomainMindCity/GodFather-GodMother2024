@@ -181,6 +181,18 @@ public class Monster : MonsterBehavior
         throw new System.NotImplementedException();
     }
 
+    public override void UnflashMonster()
+    {
+        if (_toChase != null)
+        {
+            _stateAI = States.CHASE;
+        }
+        else
+        {
+            _stateAI = States.WALKING;
+        }
+    }
+
     // Stunned
     protected override void Flashed()
     {
