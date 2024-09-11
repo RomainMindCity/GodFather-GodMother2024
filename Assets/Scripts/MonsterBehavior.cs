@@ -10,6 +10,7 @@ public abstract class MonsterBehavior : MonoBehaviour
 
     [Header("Values GD")]
     [SerializeField] protected bool _activated = true;
+    [SerializeField] protected float _radiusDetection;
 
     protected bool _canBeControlled = false;
 
@@ -27,6 +28,8 @@ public abstract class MonsterBehavior : MonoBehaviour
     protected GameObject _zoneDetection;
 
     protected Vector2 _velocity = Vector2.zero;
+
+    protected CircleCollider2D _collider2D;
 
     protected enum StatesBehavior
     {
@@ -48,6 +51,8 @@ public abstract class MonsterBehavior : MonoBehaviour
     {
         _aiPath = GetComponent<AIPath>();
         _zoneDetection = transform.Find("Zone").gameObject;
+        _collider2D = GetComponent<CircleCollider2D>();
+        _collider2D.radius = _radiusDetection;
 
         Init();
     }
@@ -114,6 +119,7 @@ public abstract class MonsterBehavior : MonoBehaviour
     /// Function called when the monster is in the flashlight
     /// </summary>
     public abstract void FlashMonster(Vector3? playerPosition = null);
+
     /// <summary>
     /// Function you can call to unflash the monster (when the monster is out of the flashlight)
     /// </summary>
@@ -163,6 +169,11 @@ public abstract class MonsterBehavior : MonoBehaviour
     /// </summary>
     protected abstract void Player();
 
+    /// <summary>
+    /// Check if there is a wall between the monster and the player
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
     protected bool checkWalls(Collider2D other)
     {
 

@@ -142,15 +142,6 @@ public class CoilHead : MonsterBehavior
 
     protected override void Flashed()
     {
-        //_timerFlash += Time.deltaTime;
-        //if (_timerFlash >= _timeFlashed)
-        //{
-        //    if (_toChase != null) { _stateAI = States.CHASE; }
-        //    else { _stateAI = States.WALKING; }
-
-        //    _timerFlash = 0;
-        //    _aiPath.maxSpeed = _speed;
-        //}
     }
 
     public override void FlashMonster(Vector3? playerPosition = null)
