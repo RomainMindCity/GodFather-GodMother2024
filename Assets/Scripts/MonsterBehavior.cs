@@ -1,0 +1,161 @@
+using Pathfinding;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class MonsterBehavior : MonoBehaviour
+{
+
+    protected float _speed;
+
+    protected bool canBeControlled = false;
+
+    protected List<string> tagsWalls = new List<string> { "Wall", "Door", "Environement" };
+
+    protected States _stateAI = States.NONE;
+    protected StatesBehavior _state = StatesBehavior.AI;
+
+    [SerializeField]
+    protected Transform _toChase;
+
+    protected AIPath _aiPath;
+
+    protected GameObject _zoneDetection;
+
+    protected Vector2 _velocity = Vector2.zero;
+
+    protected enum StatesBehavior
+    {
+        NONE,
+        AI,
+        PLAYER
+    }
+
+    protected enum States
+    {
+        NONE,
+        WALKING,
+        FLASHED,
+        CHASE,
+
+    }
+
+    void Start() 
+    {
+        _aiPath = GetComponent<AIPath>();
+        _zoneDetection = transform.Find("Zone").gameObject;
+
+        Init();
+    }
+
+    protected abstract void Init();
+
+    void Update() 
+    {
+        switch (_state)
+        {
+            case StatesBehavior.NONE:
+                break;
+
+            case StatesBehavior.AI:
+                Ai();
+                break;
+
+            case StatesBehavior.PLAYER:
+                Player();
+                break;
+        }
+    }
+
+    void Ai()
+    {
+        switch (_stateAI)
+        {
+            case States.NONE:
+                None();
+                break;
+            case States.WALKING:
+                Walking();
+                break;
+            case States.FLASHED:
+                Flashed();
+                break;
+            case States.CHASE:
+                Chase();
+                break;
+        }
+    }
+
+
+    /// <summary>
+    /// Function called when the monster is in the flashlight
+    /// </summary>
+    public abstract void FlashMonster(Vector3? playerPosition = null);
+
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log("Enter");
+    //    if (other.CompareTag("Player")) {
+    //        _toChase = other.transform;
+    //        OnPlayerEnter(other);
+    //    }
+        
+    //}
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Debug.Log("Enter");
+        OnPlayerEnter(collision);
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        //Debug.Log("Exit");
+        OnPlayerExit(other);
+    }
+
+    
+
+    protected abstract void OnPlayerEnter(Collider2D other);
+    protected abstract void OnPlayerExit(Collider2D other);
+
+    /// <summary>
+    /// Function that is called when the monster is Flashed
+    /// </summary>
+    protected abstract void Flashed();
+
+    /// <summary>
+    /// Function that is called when the monster is in the chase state
+    /// </summary>
+    protected abstract void Chase();
+
+    /// <summary>
+    /// Function that is called for the walking state of the AI
+    /// </summary>
+    protected abstract void Walking();
+
+    /// <summary>
+    /// Function that is called for the none state of the AI
+    /// </summary>
+    protected abstract void None();
+
+    /// <summary>
+    /// Function that is called when the monster is controlled (state = Player)
+    /// </summary>
+    protected abstract void Player();
+
+    protected bool checkWalls(Collider2D other)
+    {
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, other.transform.position - transform.position, Vector2.Distance(transform.position, other.transform.position), LayerMask.GetMask("Wall"));
+
+        if (hit.collider != null && tagsWalls.Contains(hit.collider.tag))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+}
