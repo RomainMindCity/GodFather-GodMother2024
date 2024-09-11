@@ -35,12 +35,14 @@ public class Bracken : MonsterBehavior
         if (other.gameObject.tag == "Player")
         {
 
-            if (checkWalls(other))
+            _toChase = other.gameObject.transform;
+
+            if (_needToSee && checkWalls(other))
             {
                 return;
             }
 
-            _toChase = other.gameObject.transform;
+            
             _stateAI = States.CHASE;
         }
     }
@@ -50,7 +52,7 @@ public class Bracken : MonsterBehavior
         if (other.gameObject.tag == "Player")
         {
 
-            if (checkWalls(other))
+            if (_needToSee && checkWalls(other))
             {
                 return;
             }
@@ -81,6 +83,8 @@ public class Bracken : MonsterBehavior
         {
             _pointToGo = transform.position + RotateVector2D(new Vector3(radiusPatrol, 0, 0), Random.Range(0f, 360f));
         }
+
+        if (_toChase != null && checkWalls(_toChase)) { _stateAI = States.CHASE; }
     }
     protected override void Chase()
     {

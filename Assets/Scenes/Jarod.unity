@@ -882,7 +882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _activated: 1
-  _toChase: {fileID: 0}
+  _needToSee: 0
   _baseSpeed: 2
   _angrySpeed: 3
   radiusPatrol: 10
@@ -1215,7 +1215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _activated: 1
-  _toChase: {fileID: 1782516449}
+  _needToSee: 1
   _baseSpeed: 2
   seeker: {fileID: 0}
   radiusPatrol: 5

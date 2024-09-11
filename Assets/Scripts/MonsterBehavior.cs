@@ -18,6 +18,8 @@ public abstract class MonsterBehavior : MonoBehaviour
     protected States _stateAI = States.NONE;
     protected StatesBehavior _state = StatesBehavior.AI;
 
+    [SerializeField] protected bool _needToSee;
+
     protected Transform _toChase;
 
     protected AIPath _aiPath;
@@ -162,6 +164,19 @@ public abstract class MonsterBehavior : MonoBehaviour
     protected abstract void Player();
 
     protected bool checkWalls(Collider2D other)
+    {
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, other.transform.position - transform.position, Vector2.Distance(transform.position, other.transform.position), LayerMask.GetMask("Wall"));
+
+        if (hit.collider != null && tagsWalls.Contains(hit.collider.tag))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected bool checkWalls(Transform other)
     {
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, other.transform.position - transform.position, Vector2.Distance(transform.position, other.transform.position), LayerMask.GetMask("Wall"));

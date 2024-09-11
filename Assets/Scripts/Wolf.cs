@@ -15,7 +15,7 @@ public class Wolf : MonsterBehavior
 
     protected override void OnPlayerEnter(Collider2D other)
     {
-
+        // Jumps to the player
     }
 
     protected override void OnPlayerExit(Collider2D other)
