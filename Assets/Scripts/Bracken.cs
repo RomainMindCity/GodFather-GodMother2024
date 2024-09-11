@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -12,6 +13,7 @@ public class Bracken : MonsterBehavior
 
     [SerializeField] private float _baseSpeed = 200;
     [SerializeField] private float _angrySpeed = 300;
+    [SerializeField] private float _distToRun = 10;
 
     private float _timerFlash = 0;
     private float _timeFlashed = 3;
@@ -129,7 +131,13 @@ public class Bracken : MonsterBehavior
             _timerFlash = 0;
             _speed = _baseSpeed;
             _aiPath.maxSpeed = _speed;
-            _aiPath.destination = -_aiPath.destination;
+
+            Vector2 vec1 = new Vector2(transform.position.x, transform.position.y);
+            Vector2 vec2 = new Vector2(_toChase.position.x, _toChase.position.y);
+
+            float distance = Vector2.Distance(vec1, vec2);
+
+            _aiPath.destination = -_aiPath.destination * (_distToRun / distance);
 
         }
 

@@ -8,55 +8,104 @@ using UnityEngine;
 public class Wolf : MonsterBehavior
 {
 
+    [SerializeField] float _timeAfterChase = 3;
+
     protected override void Init()
     {
-        
+        _stateAI = States.NONE;
+        _speed = 10;
+
     }
 
     protected override void OnPlayerEnter(Collider2D other)
     {
-        // Jumps to the player
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("WOLF ENTERED");
+            _toChase = other.gameObject.transform;
+        }
     }
 
     protected override void OnPlayerExit(Collider2D other)
     {
-
+        if (other.gameObject.tag == "Player")
+        {
+            _toChase = null;
+        }
     }
 
 
     public override void FlashMonster(Vector3? playerPosition = null)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void UnflashMonster()
     {
-        throw new System.NotImplementedException();
+        
     }
     protected override void Player()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     //------------------ AI STATES ------------------
 
     protected override void Flashed()
     {
-        throw new System.NotImplementedException();
+        _stateAI = States.NONE;
     }
 
     protected override void Walking()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     protected override void None()
     {
-        throw new System.NotImplementedException();
+
+
+        _aiPath.canMove = false;
+        if (_toChase != null && !checkWalls(_toChase))
+        {
+            _stateAI = States.CHASE;
+            _aiPath.destination = _toChase.position;
+            _aiPath.maxSpeed = _speed;
+            _aiPath.canMove = true;
+        }
+
     }
+
+    IEnumerator _afterChase()
+    {
+        _stateAI = States.WALKING;
+
+        Debug.Log("WOLF START COROUTINE");
+        Debug.Log(_timeAfterChase.ToString());
+
+        yield return new WaitForSeconds(_timeAfterChase);
+
+        Debug.Log("WOLF END COROUTINE");
+
+        if (_toChase != null)
+        {
+            Debug.Log("WOLF CHASE");
+            _aiPath.destination = _toChase.position;
+            _stateAI = States.CHASE;
+        }
+        else
+        {
+            Debug.Log("WOLF NONE");
+            _stateAI = States.NONE;
+        }
+    }
+
     protected override void Chase()
     {
-        throw new System.NotImplementedException();
+        if (_aiPath.reachedEndOfPath) 
+        {
+            StartCoroutine(_afterChase());
+        }
     }
 
 
