@@ -10,6 +10,7 @@ public abstract class MonsterBehavior : MonoBehaviour
 
     protected bool canBeControlled = false;
 
+    protected List<string> tagsWalls = new List<string> { "Wall", "Door", "Environement" };
 
     protected States _stateAI = States.NONE;
     protected StatesBehavior _state = StatesBehavior.AI;
@@ -91,27 +92,33 @@ public abstract class MonsterBehavior : MonoBehaviour
     /// </summary>
     public abstract void FlashMonster(Vector3? playerPosition = null);
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player")) {
-            _toChase = other.transform;
-            OnPlayerEnter(other);
-        }
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log("Enter");
+    //    if (other.CompareTag("Player")) {
+    //        _toChase = other.transform;
+    //        OnPlayerEnter(other);
+    //    }
         
-    }
-    void OnTriggerExit(Collider other)
+    //}
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Player"))
-        {
-            _toChase = null;
-            OnPlayerExit(other);
-        }
+        //Debug.Log("Enter");
+        OnPlayerEnter(collision);
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        //Debug.Log("Exit");
+        OnPlayerExit(other);
     }
 
     
 
-    protected abstract void OnPlayerEnter(Collider other);
-    protected abstract void OnPlayerExit(Collider other);
+    protected abstract void OnPlayerEnter(Collider2D other);
+    protected abstract void OnPlayerExit(Collider2D other);
 
     /// <summary>
     /// Function that is called when the monster is Flashed
@@ -137,5 +144,18 @@ public abstract class MonsterBehavior : MonoBehaviour
     /// Function that is called when the monster is controlled (state = Player)
     /// </summary>
     protected abstract void Player();
+
+    protected bool checkWalls(Collider2D other)
+    {
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, other.transform.position - transform.position, Vector2.Distance(transform.position, other.transform.position), LayerMask.GetMask("Wall"));
+
+        if (hit.collider != null && tagsWalls.Contains(hit.collider.tag))
+        {
+            return true;
+        }
+
+        return false;
+    }
 
 }

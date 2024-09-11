@@ -166,12 +166,12 @@ public class Monster : MonsterBehavior
 
     }
 
-    protected override void OnPlayerEnter(Collider other)
+    protected override void OnPlayerEnter(Collider2D other)
     {
         throw new System.NotImplementedException();
     }
 
-    protected override void OnPlayerExit(Collider other)
+    protected override void OnPlayerExit(Collider2D other)
     {
         throw new System.NotImplementedException();
     }

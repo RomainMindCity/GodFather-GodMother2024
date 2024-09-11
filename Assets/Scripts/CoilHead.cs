@@ -37,17 +37,36 @@ public class CoilHead : MonsterBehavior
 
     
 
-    protected override void OnPlayerEnter(Collider other)
+    protected override void OnPlayerEnter(Collider2D other)
     {
+
+        //Debug.Log("Entered");
+
+        
+
         if (other.gameObject.tag == "Player") {
-            _toChase = other.gameObject.transform; 
+
+            if (checkWalls(other))
+            {
+                return;
+            }
+            _toChase = other.gameObject.transform;
+            _stateAI = States.CHASE;
         }
     }
 
-    protected override void OnPlayerExit(Collider other)
+    protected override void OnPlayerExit(Collider2D other)
     {
+
         if (other.gameObject.tag == "Player")
         {
+
+
+            if (checkWalls(other))
+            {
+                return;
+            }
+
             _toChase = null;
         }
     }
@@ -78,10 +97,13 @@ public class CoilHead : MonsterBehavior
     }
     protected override void Chase()
     {
-        Debug.Log("Chase ? ");
-
+        //Debug.Log("Chase ? ");
+        if (_toChase == null && _aiPath.reachedEndOfPath) { _stateAI = States.WALKING; return; }
         _aiPath.maxSpeed = _speed;
-        _aiPath.destination = _toChase.position;
+        if (_toChase != null)
+        {
+            _aiPath.destination = _toChase.position;
+        }
         //Debug.Log("Chase");
     }
 

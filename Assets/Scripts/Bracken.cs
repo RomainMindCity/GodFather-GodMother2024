@@ -12,6 +12,7 @@ public class Bracken : MonsterBehavior
     private float _timerFlash = 0;
     private float _timeFlashed = 3;
 
+    [SerializeField]
     float radiusPatrol;
 
     Vector3 _pointToGo = Vector3.zero;
@@ -25,18 +26,31 @@ public class Bracken : MonsterBehavior
 
 
 
-    protected override void OnPlayerEnter(Collider other)
+    protected override void OnPlayerEnter(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
+
+            if (checkWalls(other))
+            {
+                return;
+            }
+
             _toChase = other.gameObject.transform;
+            _stateAI = States.CHASE;
         }
     }
 
-    protected override void OnPlayerExit(Collider other)
+    protected override void OnPlayerExit(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
+
+            if (checkWalls(other))
+            {
+                return;
+            }
+
             _toChase = null;
         }
     }
@@ -57,9 +71,7 @@ public class Bracken : MonsterBehavior
     }
     protected override void Walking()
     {
-
         _aiPath.destination = _pointToGo;
-
 
         if (_aiPath.reachedEndOfPath)
         {
@@ -68,8 +80,12 @@ public class Bracken : MonsterBehavior
     }
     protected override void Chase()
     {
+        if (_toChase == null && _aiPath.reachedEndOfPath) { _stateAI = States.WALKING; return; }
         _aiPath.maxSpeed = _speed;
-        _aiPath.destination = _toChase.position;
+        if (_toChase != null)
+        {
+            _aiPath.destination = _toChase.position;
+        }
     }
 
     protected override void Flashed()
