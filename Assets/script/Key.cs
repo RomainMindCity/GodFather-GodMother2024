@@ -6,8 +6,11 @@ using UnityEngine.Events;
 
 public class Key : MonoBehaviour
 {
-    public GameObject porte; // Il faudra drag'n drop la "porte" que l'on souhaite ouvrir dans cette variable (depuis l'éditeur)
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField]private GameObject porte; // Il faudra drag'n drop la "porte" que l'on souhaite ouvrir dans cette variable (depuis l'éditeur)
     private bool inTrigger;
+    [SerializeField]private AudioSource keySound;
+    [SerializeField] private int probability;
 
     void Update()
     {
@@ -15,8 +18,10 @@ public class Key : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                keySound.Play();
                 porte.GetComponent<door>().ouverture();
-                Destroy(gameObject);
+                spriteRenderer.enabled = false;
+                
             }
         }
     }

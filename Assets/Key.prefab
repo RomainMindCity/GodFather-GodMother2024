@@ -162,3 +162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   porte: {fileID: 0}
+  audioSourceA: {fileID: 0}
+  audioSourceB: {fileID: 0}
+  probability: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class door : MonoBehaviour
@@ -13,6 +14,9 @@ public class door : MonoBehaviour
     private Vector2 directionAngle;                                     // Variable pour tranformer l'angle RotationPath (en degré) vers une direction (Vector2)
     private Vector3 destinationPosition;                                // Sert a transformer la distance avec la destination en coordonnées X/Y/Z
     private bool go;
+    public int probability;
+    [SerializeField] AudioSource audioSourceA;
+    [SerializeField] AudioSource audioSourceB;
 
     // Ici on va enregistrer la position de la destination en utilisant l'angle de rotation et la distance qu'on a choisie
     void Start()
@@ -33,7 +37,9 @@ public class door : MonoBehaviour
     // fontion pour passer "GO" en vrai, qui doit être appeler depuis un autre script (Comme sur un levier qui doit ouvrire cette porte, CF script levierPorte)
     public void ouverture()
     {
+        StartCoroutine(cooldown());
         go = true;
+       
     }
 
     // Fonction pour dessiner le chemin que prendra la porte en s'ouvrant dans l'éditeur
@@ -48,5 +54,19 @@ public class door : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(destinationPosition, 0.2f);
         Gizmos.DrawLine(destinationPosition, transform.position);
+    }
+
+    IEnumerator cooldown()
+    {
+        yield return new WaitForSeconds(0.5f);
+        probability = Random.Range(0, 101);
+        if (probability <= 20)
+        {
+            audioSourceA.Play();
+        }
+        else
+        {
+            audioSourceB.Play();
+        }
     }
 }
