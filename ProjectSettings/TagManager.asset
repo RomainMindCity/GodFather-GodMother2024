@@ -10,6 +10,7 @@ TagManager:
   - Wall
   - Qte
   - Door
+  - Key
   layers:
   - Default
   - TransparentFX
