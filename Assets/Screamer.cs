@@ -28,7 +28,7 @@ public class Screamer : MonoBehaviour
             if (PlayerHeartBeat.GetHeartBeat() > 150 && _canChange)
             {
                 _canChange = false;
-                _image.DOColor(_image.color.WithAlpha(0.5f), 0.2f).OnComplete(
+                _image.DOColor(_image.color.WithAlpha(1f), 0.1f).OnComplete(
                     () => _image.DOColor(_image.color.WithAlpha(0), 1f).OnComplete(
                         () => _canChange = true)
                     );
