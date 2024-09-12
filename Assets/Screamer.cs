@@ -15,13 +15,16 @@ public class Screamer : MonoBehaviour
 
     bool _scream = false;
 
+    AudioSource _audioSource;
+
     Image _image;
 
     bool _canChange = true;
 
     void Start()
     {
-        _image = GetComponent<Image>(); 
+        _image = GetComponent<Image>();
+        _audioSource = GetComponent<AudioSource>();
 
         _image.color.WithAlpha(0.0f);
     }
@@ -49,7 +52,8 @@ public class Screamer : MonoBehaviour
                 _canChange = false;
                 _image.DOColor(_image.color.WithAlpha(1), 0.1f);
                 _scream = true;
-
+                _audioSource.Play();
+                
                 // JOUE LE SON
 
                 //_image.DOColor(_image.color.WithAlpha(0.5f), 0.2f).OnComplete(
