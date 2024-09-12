@@ -48,7 +48,7 @@ public class PlayerHeartBeat : MonoBehaviour
         GameObject audioInstance = Instantiate(audioPrefab, transform.position, Quaternion.identity);
         if (!audioInstance.GetComponent<AudioSource>().isPlaying)
         {
-           //Destroy(audioInstance);
+           Destroy(audioInstance);
         }
         yield return new WaitForSeconds(waitTime);
 
