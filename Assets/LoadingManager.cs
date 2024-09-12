@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class LoadingManager : MonoBehaviour
 {
 
-    [SerializeField] Transform _objectToAnimate;
 
     GameObject _playButton;
     GameObject _optionButton;
@@ -53,7 +52,6 @@ public class LoadingManager : MonoBehaviour
         _listButtonsBackgrounds.Add(_optionButtonBack);
         _listButtonsBackgrounds.Add(_quitButtonBack);
 
-        _objectToAnimate = _playButton.transform;
 
         ChangeColors();
         ChangePositionButton();
@@ -110,7 +108,7 @@ public class LoadingManager : MonoBehaviour
                         }
                         else
                         {
-                            currentCube.DORotate(new Vector3(0, 0, 360), 2.5f, RotateMode.FastBeyond360).SetLoops(-1);
+                            currentCube.DORotate(new Vector3(0, 0, -360), 2.5f, RotateMode.FastBeyond360).SetLoops(-1);
                         }
                     }
                 });
@@ -143,15 +141,6 @@ public class LoadingManager : MonoBehaviour
         {
             DoActionButton();
         }
-
-        //if (_listButtons[_selectedButton].GetComponent<TextMeshProUGUI>().color == _endColor)
-        //{
-        //    _listButtons[_selectedButton].GetComponent<TextMeshProUGUI>().DOColor(_startColor, 1f);
-        //}
-        //else if (_listButtons[_selectedButton].GetComponent<TextMeshProUGUI>().color == _startColor)
-        //{
-        //    _listButtons[_selectedButton].GetComponent<TextMeshProUGUI>().DOColor(_endColor, 1f);
-        //}
 
     }
 

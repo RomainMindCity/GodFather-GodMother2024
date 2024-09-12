@@ -146,9 +146,17 @@ public class CoilHead : MonsterBehavior
 
     public override void FlashMonster(Vector3? playerPosition = null)
     {
+
+        if (_state == StatesBehavior.NONE && _activatedByFlash)
+        {
+            _state = StatesBehavior.AI;
+            return;
+        }
+
         _stateAI = States.FLASHED;
         //_timerFlash = 0;
         _aiPath.maxSpeed = 0;
+
 
 
 
@@ -193,16 +201,5 @@ public class CoilHead : MonsterBehavior
         return furthestPoint;
     }
 
-    Vector3 RotateVector2D(Vector3 vector, float angle)
-    {
-        float rad = angle * Mathf.Deg2Rad;
-
-        float cos = Mathf.Cos(rad);
-        float sin = Mathf.Sin(rad);
-
-        float rotatedX = vector.x * cos - vector.y * sin;
-        float rotatedY = vector.x * sin + vector.y * cos;
-
-        return new Vector3(rotatedX, rotatedY, vector.z);
-    }
+    
 }

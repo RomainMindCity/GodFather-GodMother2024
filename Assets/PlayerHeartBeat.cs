@@ -10,13 +10,18 @@ public class PlayerHeartBeat : MonoBehaviour
     [SerializeField] private GameObject audioPrefab;
     [SerializeField] private TextMeshProUGUI _heartBeatText;
     [SerializeField] private GameObject _heartBeatImage;
-    private float _heartBeat;
+    private static float _heartBeat;
     [SerializeField] private float _heartBeatMax = 180;
     [SerializeField] private float _heartBeatMin = 60;
 
     void Start()
     {
         StartCoroutine(FindObjects());
+    }
+
+    public static float GetHeartBeat()
+    {
+        return _heartBeat;
     }
 
     IEnumerator FindObjects()

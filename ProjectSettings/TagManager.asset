@@ -8,6 +8,7 @@ TagManager:
   - CoilHead
   - Bracken
   - Wall
+  - Qte
   layers:
   - Default
   - TransparentFX
