@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private CanvasManager _canvasManager;
     Vector2 _moveInput;
+    bool _canWalk;
 
     public CanvasManager CanvasManager { get => _canvasManager; set => _canvasManager = value; }
 
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     {
         _canvasManager = GameObject.Find("Manager").GetComponent<CanvasManager>();
         //Cursor.lockState = CursorLockMode.Locked;
+        _canWalk = true;
     }
 
     void Update()
@@ -27,18 +29,12 @@ public class PlayerController : MonoBehaviour
             _canvasManager.UpdateCanvas();
         }
         if (!_canvasManager.IsInMenu) PlayerMovement();
-        PlayerCollision();
     }    
 
     void PlayerMovement()
     {
         Vector2 moveDirection = new Vector2(_moveInput.x, _moveInput.y).normalized;
         gameObject.transform.Translate(moveDirection * _speed * Time.deltaTime);
-    }
-
-    void PlayerCollision()
-    {
-        //faire la logique de collision ici
     }
 
     public void OnMovement(InputAction.CallbackContext context)
