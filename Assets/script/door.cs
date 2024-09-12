@@ -15,14 +15,14 @@ public class door : MonoBehaviour
     private Vector3 destinationPosition;                                // Sert a transformer la distance avec la destination en coordonnées X/Y/Z
     private bool go;
     public int probability;
-    [SerializeField] AudioSource audioSourceA;
-    [SerializeField] AudioSource audioSourceB;
+    [SerializeField] AudioSource soundDoor;
+    [SerializeField] private float cooldown = 1f;
 
     // Ici on va enregistrer la position de la destination en utilisant l'angle de rotation et la distance qu'on a choisie
     void Start()
     {
         directionAngle = (Vector2)(Quaternion.Euler(0, 0, RotationPath) * Vector2.right);
-        destinationPosition = transform.position + (Vector3)directionAngle * destination;
+        destinationPosition = transform.position + (Vector3)directionAngle * destination; 
     }
 
     // Si go est vrai alors on déplace la porte vers sa destination
@@ -37,9 +37,8 @@ public class door : MonoBehaviour
     // fontion pour passer "GO" en vrai, qui doit être appeler depuis un autre script (Comme sur un levier qui doit ouvrire cette porte, CF script levierPorte)
     public void ouverture()
     {
-        StartCoroutine(cooldown());
         go = true;
-       
+        StartCoroutine(cooldownCorroutine());
     }
 
     // Fonction pour dessiner le chemin que prendra la porte en s'ouvrant dans l'éditeur
@@ -56,17 +55,9 @@ public class door : MonoBehaviour
         Gizmos.DrawLine(destinationPosition, transform.position);
     }
 
-    IEnumerator cooldown()
+    IEnumerator cooldownCorroutine()
     {
-        yield return new WaitForSeconds(0.5f);
-        probability = Random.Range(0, 101);
-        if (probability <= 20)
-        {
-            audioSourceA.Play();
-        }
-        else
-        {
-            audioSourceB.Play();
-        }
+        yield return new WaitForSeconds(cooldown);
+        soundDoor.Play();
     }
 }

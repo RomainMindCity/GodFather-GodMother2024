@@ -11,6 +11,7 @@ public class Key : MonoBehaviour
     private bool inTrigger;
     [SerializeField]private AudioSource keySound;
     [SerializeField] private int probability;
+    [SerializeField] private Collider2D Collider2D;
 
     void Update()
     {
@@ -19,9 +20,10 @@ public class Key : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 keySound.Play();
+                Collider2D.enabled = false;
                 porte.GetComponent<door>().ouverture();
                 spriteRenderer.enabled = false;
-                
+
             }
         }
     }

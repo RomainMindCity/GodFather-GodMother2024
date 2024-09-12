@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class FakeDoors : MonoBehaviour
 {
-    [SerializeField] AudioSource Sound;
+    [SerializeField] AudioSource audioSourceA;
+    [SerializeField] AudioSource audioSourceB;
+    public int probability;
     void Start()
     {
         
@@ -18,7 +20,15 @@ public class FakeDoors : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Sound.Play();
+        probability = Random.Range(0, 101);
+        if (probability <= 20)
+        {
+            audioSourceA.Play();
+        }
+        else
+        {
+            audioSourceB.Play();
+        }
     }
 
 
