@@ -12,9 +12,11 @@ public class LoadingManager : MonoBehaviour
 
     GameObject _playButton;
     GameObject _optionButton;
+    GameObject _playModButton;
     GameObject _quitButton;
 
     GameObject _playButtonBack;
+    GameObject _playModButtonBack;
     GameObject _optionButtonBack;
     GameObject _quitButtonBack;
 
@@ -37,18 +39,22 @@ public class LoadingManager : MonoBehaviour
 
         _center = GameObject.Find("Center");
         _playButton = GameObject.Find("Play");
+        _playModButton = GameObject.Find("PlayEaster");
         _optionButton = GameObject.Find("Options");
         _quitButton = GameObject.Find("Quit");
 
         _playButtonBack = GameObject.Find("PlayBack");
+        _playModButtonBack = GameObject.Find("PlayEasterBack");
         _optionButtonBack = GameObject.Find("OptionsBack");
         _quitButtonBack = GameObject.Find("QuitBack");
 
         _listButtons.Add(_playButton);
+        _listButtons.Add( _playModButton);
         _listButtons.Add(_optionButton);
         _listButtons.Add(_quitButton);
 
         _listButtonsBackgrounds.Add(_playButtonBack);
+        _listButtonsBackgrounds.Add(_playModButtonBack);
         _listButtonsBackgrounds.Add(_optionButtonBack);
         _listButtonsBackgrounds.Add(_quitButtonBack);
 
@@ -170,9 +176,12 @@ public class LoadingManager : MonoBehaviour
                 Play();
                 break;
             case 1:
-                Options();
+                PlayEaster();
                 break;
             case 2:
+                Options();
+                break;
+            case 3:
                 Quit();
                 break;
         }
@@ -182,6 +191,13 @@ public class LoadingManager : MonoBehaviour
     {
         _playButton.GetComponent<TextMeshProUGUI>().DOColor(Color.black, 0.2f);
         SceneManager.LoadScene("MainScene");
+    }
+
+    void PlayEaster()
+    {
+        _playModButton.GetComponent<TextMeshProUGUI>().DOColor(Color.black, 0.2f);
+        SceneManager.LoadScene("DBDMode");
+
     }
 
     void Options()
