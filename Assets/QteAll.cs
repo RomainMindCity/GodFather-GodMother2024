@@ -57,7 +57,7 @@ public class QteAll : MonoBehaviour
             _scrollBar.value = 0;
             
             _qteRed._active = true;
-            _handle.GetComponent<Image>().DOColor(Color.black, 0.1f).SetEase(Ease.InOutSine);
+            _handle.GetComponent<Image>().DOColor(Color.white, 0.1f).SetEase(Ease.InOutSine);
 
             _active = true;
         });
@@ -99,7 +99,7 @@ public class QteAll : MonoBehaviour
             _qteRed._active = true;
 
             //print(_scrollBar.value);
-            if (_scrollBar.value > 0.41 && _scrollBar.value < 0.45)
+            if (_scrollBar.value > 0.40 && _scrollBar.value < 0.45)
             {
                 if (_gen != null)
                 {
