@@ -11,12 +11,15 @@ public class PlayerMouseController : MonoBehaviour
     float xRotation;
     private Coroutine coroutine;
     private Coroutine flashCoroutine;
+
+    [SerializeField] private bool _clickToActivate;
+
     void Update()
     {
         if (gameObject.GetComponentInParent<PlayerController>().CanvasManager.IsInMenu) return;
-        
+
         Vector3 mousePosition = Input.mousePosition;
-        
+
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         mousePosition.z = 0;
 
@@ -46,7 +49,7 @@ public class PlayerMouseController : MonoBehaviour
                                 StartCoroutine(FlashMonster(hit.collider.gameObject));
                             }
 
-                            if (hit.collider.gameObject.transform.parent.name == "CoilHead") 
+                            if (hit.collider.gameObject.transform.parent.name == "Coilhead") 
                             {
                                 flashCoroutine = StartCoroutine(FlashMonster(hit.collider.gameObject));
                                 if (coroutine != null)
@@ -72,7 +75,7 @@ public class PlayerMouseController : MonoBehaviour
 
     IEnumerator FlashMonster(GameObject monster)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0);
         monster.GetComponentInParent<MonsterBehavior>().FlashMonster();
     }
 

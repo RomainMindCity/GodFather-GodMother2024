@@ -8,6 +8,8 @@ TagManager:
   - CoilHead
   - Bracken
   - Wall
+  - Qte
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -44,4 +46,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 3408696177
     locked: 0

@@ -6,16 +6,18 @@ using UnityEngine;
 public abstract class MonsterBehavior : MonoBehaviour
 {
 
-    protected float _speed;
+    [SerializeField] protected float _speed;
 
     [Header("Values GD")]
     [SerializeField] protected bool _activated = true;
+
+    [SerializeField] protected bool _activatedByFlash = false;
 
     protected bool _canBeControlled = false;
 
     protected List<string> tagsWalls = new List<string> { "Wall", "Door", "Environement" };
 
-    protected States _stateAI = States.NONE;
+    [SerializeField] protected States _stateAI;
     protected StatesBehavior _state = StatesBehavior.AI;
 
     [SerializeField] protected bool _needToSee;
@@ -202,6 +204,19 @@ public abstract class MonsterBehavior : MonoBehaviour
         }
 
         return false;
+    }
+
+    protected Vector3 RotateVector2D(Vector3 vector, float angle)
+    {
+        float rad = angle * Mathf.Deg2Rad;
+
+        float cos = Mathf.Cos(rad);
+        float sin = Mathf.Sin(rad);
+
+        float rotatedX = vector.x * cos - vector.y * sin;
+        float rotatedY = vector.x * sin + vector.y * cos;
+
+        return new Vector3(rotatedX, rotatedY, vector.z);
     }
 
 }

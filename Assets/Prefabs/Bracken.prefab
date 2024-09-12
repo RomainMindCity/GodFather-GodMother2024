@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3294702816639909430}
   - component: {fileID: 3835417908267676262}
   - component: {fileID: 2827416019500537980}
+  - component: {fileID: 1011256729519379870}
   m_Layer: 0
   m_Name: Bracken
   m_TagString: Monster
@@ -154,13 +155,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12b3a9cbb0590ed40b206ac223009381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 0
   _activated: 1
-  _radiusDetection: 0
+  _activatedByFlash: 0
+  _stateAI: 0
   _needToSee: 0
   _baseSpeed: 2
   _angrySpeed: 3
   _distToRun: 10
   radiusPatrol: 10
+--- !u!50 &1011256729519379870
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394724259387198280}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &3678269193557122980
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +266,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.1745283, b: 0.82101274, a: 0.09411765}
+  m_Color: {r: 0.17647058, g: 0.22073257, b: 1, a: 0.09411765}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -291,9 +321,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7996017228534398231}
   - component: {fileID: 7665051308861464775}
+  - component: {fileID: 8892673357348837463}
+  - component: {fileID: 6034131165476921503}
   m_Layer: 0
-  m_Name: Square
-  m_TagString: Untagged
+  m_Name: Body
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -365,3 +397,68 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8892673357348837463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6226246751422299783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 0000000071932ccb
+  m_ShapePath:
+  - {x: -0.5, y: -0.50201577, z: 0}
+  - {x: -0.5, y: 0.50201577, z: 0}
+  - {x: 0.5, y: 0.50201577, z: 0}
+  - {x: 0.5, y: -0.50201577, z: 0}
+  m_ShapePathHash: 0
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -57200
+  m_LocalBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.50201577, z: 0}
+--- !u!58 &6034131165476921503
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6226246751422299783}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

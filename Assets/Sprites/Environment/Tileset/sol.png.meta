@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3598faf683785bf44b261d4c300429dc
+guid: 84f19f390d460a94daf7a845d4110b11
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sol_v2_0
+      name: sol_v3_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0905117e70bcdc549aa16f450a6ea288
-      internalID: -1332788998
+      spriteID: ea995fe17249e5d4ab12b424257c1747
+      internalID: -1307802743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sol_v2_1
+      name: sol_v3_1
       rect:
         serializedVersion: 2
         x: 32
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95cebc6abe46226478fc44d089388e9d
-      internalID: 706623301
+      spriteID: fb6538d5e2d727b4ebcb022b9915f4dc
+      internalID: -97875838
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sol_v2_2
+      name: sol_v3_2
       rect:
         serializedVersion: 2
         x: 0
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f8408ef586c95c4695ab6edb170bf4a
-      internalID: 1667926180
+      spriteID: a23b8c1be0d183a469b1304195ca3d2d
+      internalID: -70917637
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sol_v2_3
+      name: sol_v3_3
       rect:
         serializedVersion: 2
         x: 32
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a53471cc1495c804fb89bbe791c8470b
-      internalID: 1640031473
+      spriteID: a27bcb5cb805fb749a8a7aabfd44bdbe
+      internalID: 746139987
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sol_v2_4
+      name: sol_v3_4
       rect:
         serializedVersion: 2
         x: 0
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca179b485d3f62046aec38a5a88333ca
-      internalID: -1662704931
+      spriteID: 0347dd869cc94e341815c0e57e2e39e7
+      internalID: 1561961203
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sol_v2_5
+      name: sol_v3_5
       rect:
         serializedVersion: 2
         x: 32
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab12e1795b20a8741b0db7d6ca4b4629
-      internalID: 1787512974
+      spriteID: ef76078605cfc684b8ac0f83e8001dd7
+      internalID: 1978167359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sol_v2_6
+      name: sol_v3_6
       rect:
         serializedVersion: 2
         x: 0
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddb5ca196184b2c4197082b344f4c7b1
-      internalID: 1691915534
+      spriteID: dd62e5e798db05c4fbcd205945d01606
+      internalID: 1804457303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sol_v2_7
+      name: sol_v3_7
       rect:
         serializedVersion: 2
         x: 32
@@ -271,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 763e0126fa52a2a46838259f7f703d0a
-      internalID: 963005805
+      spriteID: f20167fddfd21284f854dcec69204789
+      internalID: 781540707
       vertices: []
       indices: 
       edges: []
@@ -288,14 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sol_v2_0: -1332788998
-      sol_v2_1: 706623301
-      sol_v2_2: 1667926180
-      sol_v2_3: 1640031473
-      sol_v2_4: -1662704931
-      sol_v2_5: 1787512974
-      sol_v2_6: 1691915534
-      sol_v2_7: 963005805
+      sol_v3_0: -1307802743
+      sol_v3_1: -97875838
+      sol_v3_2: -70917637
+      sol_v3_3: 746139987
+      sol_v3_4: 1561961203
+      sol_v3_5: 1978167359
+      sol_v3_6: 1804457303
+      sol_v3_7: 781540707
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

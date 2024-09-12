@@ -100,6 +100,9 @@ public class Bracken : MonsterBehavior
 
     protected override void Flashed()
     {
+
+
+
         Walking();
         _timerFlash += Time.deltaTime;
         
@@ -118,6 +121,12 @@ public class Bracken : MonsterBehavior
 
     public override void FlashMonster(Vector3? playerPosition = null)
     {
+
+        if (_state == StatesBehavior.NONE && _activatedByFlash)
+        {
+            _state = StatesBehavior.AI;
+            return;
+        }
 
         if (_stateAI == States.FLASHED)
         {
