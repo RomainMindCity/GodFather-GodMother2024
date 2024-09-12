@@ -12,7 +12,15 @@ public class PlayerController : MonoBehaviour
     Vector2 _moveInput;
     bool _canWalk;
 
+
+    const string  idle = "Idle";
+    const string front = "Front";
+    const string left = "Left";
+    const string back = "Back";
+
+
     [SerializeField] bool _canBeStopped = false; // Pour le mode endless (oui je fais chier)
+    string _currentAnimation;
 
     public CanvasManager CanvasManager { get => _canvasManager; set => _canvasManager = value; }
 
@@ -46,36 +54,39 @@ public class PlayerController : MonoBehaviour
     public void OnMovement(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
-
-        if (_moveInput.x == 0 && _moveInput.y == 0)
-        {
-            animator.SetInteger("Direction", 4);
-        }
-
+        Debug.Log(_moveInput);
         switch (_moveInput.x)
         {
             case 1:
-                animator.SetInteger("Direction", 1);
+                GetComponent<SpriteRenderer>().flipX = false;
+                ChangeAnimationState(left);
                 break;
             case -1:
-                animator.SetInteger("Direction", 3);
+                GetComponent<SpriteRenderer>().flipX = true;
+                ChangeAnimationState(left);
                 break;
             default:
                 switch (_moveInput.y)
                 {
                     case 1:
-                        animator.SetInteger("Direction", 0);
+                        ChangeAnimationState(back);
                         break;
                     case -1:
-                        animator.SetInteger("Direction", 2);
+                        ChangeAnimationState(front);
                         break;
-                    default:
-                        animator.SetInteger("Direction", 4);
+                    case 0:
+                        ChangeAnimationState(idle);
                         break;
                 }
                 break;
         }
+    }
 
+    void ChangeAnimationState(string animationName)
+    {
+        if (_currentAnimation == animationName) return;
 
+        animator.Play(animationName);
+        _currentAnimation = animationName;
     }
 }
