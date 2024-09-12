@@ -11,18 +11,32 @@ public class PlayerMouseController : MonoBehaviour
     float xRotation;
     private Coroutine coroutine;
     private Coroutine flashCoroutine;
+
+    [SerializeField] private bool _clickToActivate = true;
+
     void Update()
     {
         if (gameObject.GetComponentInParent<PlayerController>().CanvasManager.IsInMenu) return;
-        
+
         Vector3 mousePosition = Input.mousePosition;
-        
+
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         mousePosition.z = 0;
 
         Vector3 lookDirection = mousePosition - transform.position;
         float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+
+        if (_clickToActivate && !Input.GetMouseButton(0))
+        {
+            transform.Find("Point Light 2D").gameObject.SetActive(false);
+            return;
+        } else if (_clickToActivate && Input.GetMouseButton(0))
+        {
+            transform.Find("Point Light 2D").gameObject.SetActive(true);
+        }
+
+
 
         ShotRaycast();
     }
@@ -56,6 +70,7 @@ public class PlayerMouseController : MonoBehaviour
                                 coroutine = StartCoroutine(UnflashMonster(hit.collider.gameObject));
                             }
                             break;
+
                         default:
                             break;
                     }
