@@ -64,7 +64,7 @@ public class LoadingManager : MonoBehaviour
         
         gameObject.transform.DOScale(new Vector2(1.0f, 1.0f), duration);
         gameObject.transform.DORotate(new Vector3(0, 0, 0), duration);
-        gameObject.transform.DOMove(new Vector2(_center.transform.position.x/2f , _center.transform.position.y - (i * 20) - moreSize), duration).SetEase(Ease.OutCubic);
+        gameObject.transform.DOMove(new Vector2(_center.transform.position.x/2f , _center.transform.position.y - (i * 40) - moreSize), duration).SetEase(Ease.OutCubic);
     
     }
 
@@ -80,9 +80,9 @@ public class LoadingManager : MonoBehaviour
 
         float duration = 0.3f;
 
-        gameObject.transform.DOScale(new Vector2(1.5f, 1.5f), duration);
+        gameObject.transform.DOScale(new Vector2(1.2f, 1.2f), duration);
         gameObject.transform.DORotate(new Vector3(0, 0, 0), duration);
-        gameObject.transform.DOMove(new Vector2(_center.transform.position.x, _center.transform.position.y - (i * 20) - moreSize), duration).SetEase(Ease.OutCubic);
+        gameObject.transform.DOMove(new Vector2(_center.transform.position.x, _center.transform.position.y - (i * 40) - moreSize), duration).SetEase(Ease.OutCubic);
     
         
     }

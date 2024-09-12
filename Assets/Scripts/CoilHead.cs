@@ -32,7 +32,9 @@ public class CoilHead : MonsterBehavior
 
         _canBeControlled = true;
 
-        print(_speed.ToString());
+        GetComponent<CircleCollider2D>().radius = radiusPatrol;
+
+        //print(_speed.ToString());
         seeker = GetComponent<Seeker>();
         if (_aiPath.getPath() != null )
         {
