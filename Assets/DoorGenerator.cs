@@ -67,6 +67,8 @@ public class DoorGenerator : MonoBehaviour
         if (_toDesactivate <= 0)
         {
             OnDoorOpened?.Invoke();
+            _spriteRenderer.color = Color.white;
+
 
             //gameObject.SetActive(false);
 
