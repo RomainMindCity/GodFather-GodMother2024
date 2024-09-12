@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,7 +8,8 @@ public class PlayerController : MonoBehaviour
     public float _movSpeed;
     private float _SpeedX, _SpeedY;
     Rigidbody2D rb;
-
+    public bool hasKey = false;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -21,5 +23,5 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(_SpeedX, _SpeedY);
     }
 
-
+    
 }
