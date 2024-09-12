@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Coins_0
+  m_Name: Coins_v2_1
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 1778071746, guid: b655f79f0774d9943930413626846ac5, type: 3}
+  m_Sprite: {fileID: -2025968917, guid: 2afc908c47ace324b9db7e592b995a23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
