@@ -18,7 +18,7 @@ public class Screamer : MonoBehaviour
     {
         _image = GetComponent<Image>(); 
 
-        _image.color.WithAlpha(0.0f);
+        //_image.color.WithAlpha(0.0f);
     }
 
     void Update()
@@ -28,14 +28,14 @@ public class Screamer : MonoBehaviour
             if (PlayerHeartBeat.GetHeartBeat() > 150 && _canChange)
             {
                 _canChange = false;
-                _image.DOColor(_image.color.WithAlpha(1f), 0.1f).OnComplete(
-                    () => _image.DOColor(_image.color.WithAlpha(0), 1f).OnComplete(
-                        () => _canChange = true)
-                    );
+                //_image.DOColor(_image.color.WithAlpha(1f), 0.1f).OnComplete(
+                    //() => _image.DOColor(_image.color.WithAlpha(0), 1f).OnComplete(
+                        //() => _canChange = true)
+                    //);
             }
             else if (PlayerHeartBeat.GetHeartBeat() < 150)
             {
-                _image.color = Color.white.WithAlpha(0);
+                //_image.color = Color.white.WithAlpha(0);
             }
         }
     }

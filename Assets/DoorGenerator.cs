@@ -16,7 +16,7 @@ public class DoorGenerator : MonoBehaviour
         _circleCollider = GetComponent<CircleCollider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
-        _spriteRenderer.color = Color.grey.WithAlpha(0.2f);
+        //_spriteRenderer.color = Color.grey.WithAlpha(0.2f);
 
         _generator.OnFinishedGenerator += Desactivate;
 
