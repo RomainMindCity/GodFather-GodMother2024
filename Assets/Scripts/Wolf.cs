@@ -53,7 +53,7 @@ public class Wolf : MonsterBehavior
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("WOLF ENTERED");
+            //Debug.Log("WOLF ENTERED");
             _toChase = other.gameObject.transform;
         }
     }

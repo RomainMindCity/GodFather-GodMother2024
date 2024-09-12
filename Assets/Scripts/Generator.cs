@@ -27,6 +27,8 @@ public class Generator : MonoBehaviour
 
     public event Action OnFinishedGenerator;
 
+    QteAll _qteAll;
+
     public void AddFuel(float fuelPercentage)
     {
 
@@ -42,10 +44,11 @@ public class Generator : MonoBehaviour
         }
     }
 
-    [SerializeField] QteAll _qteAll;
-
     void Start()
     {
+
+        _qteAll = FindObjectOfType<QteAll>();
+
         _timerQteMax = UnityEngine.Random.Range(0.5f, 3f);
 
 
