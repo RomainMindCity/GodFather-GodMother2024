@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-//using DG.Tweening;
+using DG.Tweening;
 
 public class PlayerHeartBeat : MonoBehaviour
 {
+    [SerializeField] private GameObject audioPrefab;
     [SerializeField] private TextMeshProUGUI _heartBeatText;
     [SerializeField] private GameObject _heartBeatImage;
     private float _heartBeat;
@@ -43,7 +44,12 @@ public class PlayerHeartBeat : MonoBehaviour
 
         // Calculate wait time based on distance
         float waitTime = Mathf.Lerp(0.5f, 1.5f, normalizedDistance);
-        //_heartBeatImage.transform.DOPunchPosition(new Vector3(0, 10, 0), 0.5f, 10, 1);
+        _heartBeatImage.transform.DOShakeScale(0.25f, 0.1f, 10, 90, false);
+        GameObject audioInstance = Instantiate(audioPrefab, transform.position, Quaternion.identity);
+        if (!audioInstance.GetComponent<AudioSource>().isPlaying)
+        {
+           //Destroy(audioInstance);
+        }
         yield return new WaitForSeconds(waitTime);
 
         StartCoroutine(FindObjects());
