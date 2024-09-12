@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private CanvasManager _canvasManager;
+    [SerializeField] private Animator animator;
     Vector2 _moveInput;
     bool _canWalk;
 
@@ -45,5 +46,36 @@ public class PlayerController : MonoBehaviour
     public void OnMovement(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
+
+        if (_moveInput.x == 0 && _moveInput.y == 0)
+        {
+            animator.SetInteger("Direction", 4);
+        }
+
+        switch (_moveInput.x)
+        {
+            case 1:
+                animator.SetInteger("Direction", 1);
+                break;
+            case -1:
+                animator.SetInteger("Direction", 3);
+                break;
+            default:
+                switch (_moveInput.y)
+                {
+                    case 1:
+                        animator.SetInteger("Direction", 0);
+                        break;
+                    case -1:
+                        animator.SetInteger("Direction", 2);
+                        break;
+                    default:
+                        animator.SetInteger("Direction", 4);
+                        break;
+                }
+                break;
+        }
+
+
     }
 }

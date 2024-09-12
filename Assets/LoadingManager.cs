@@ -189,7 +189,7 @@ public class LoadingManager : MonoBehaviour
         throw new System.NotImplementedException();
     }
 
-    void Quit()
+    public void Quit()
     {
         Application.Quit();
     }
