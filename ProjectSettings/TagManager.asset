@@ -9,6 +9,7 @@ TagManager:
   - Bracken
   - Wall
   - Qte
+  - Door
   layers:
   - Default
   - TransparentFX

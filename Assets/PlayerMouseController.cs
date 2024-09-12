@@ -12,7 +12,7 @@ public class PlayerMouseController : MonoBehaviour
     private Coroutine coroutine;
     private Coroutine flashCoroutine;
 
-    [SerializeField] private bool _clickToActivate = true;
+    [SerializeField] private bool _clickToActivate;
 
     void Update()
     {
@@ -26,17 +26,6 @@ public class PlayerMouseController : MonoBehaviour
         Vector3 lookDirection = mousePosition - transform.position;
         float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-
-        if (_clickToActivate && !Input.GetMouseButton(0))
-        {
-            transform.Find("Point Light 2D").gameObject.SetActive(false);
-            return;
-        } else if (_clickToActivate && Input.GetMouseButton(0))
-        {
-            transform.Find("Point Light 2D").gameObject.SetActive(true);
-        }
-
-
 
         ShotRaycast();
     }
@@ -60,7 +49,7 @@ public class PlayerMouseController : MonoBehaviour
                                 StartCoroutine(FlashMonster(hit.collider.gameObject));
                             }
 
-                            if (hit.collider.gameObject.transform.parent.name == "CoilHead") 
+                            if (hit.collider.gameObject.transform.parent.name == "Coilhead") 
                             {
                                 flashCoroutine = StartCoroutine(FlashMonster(hit.collider.gameObject));
                                 if (coroutine != null)
@@ -70,7 +59,6 @@ public class PlayerMouseController : MonoBehaviour
                                 coroutine = StartCoroutine(UnflashMonster(hit.collider.gameObject));
                             }
                             break;
-
                         default:
                             break;
                     }
@@ -87,7 +75,7 @@ public class PlayerMouseController : MonoBehaviour
 
     IEnumerator FlashMonster(GameObject monster)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0);
         monster.GetComponentInParent<MonsterBehavior>().FlashMonster();
     }
 
