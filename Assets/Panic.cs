@@ -1,8 +1,10 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Panic : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class Panic : MonoBehaviour
     [SerializeField] bool iheuiahe;
 
     [SerializeField] AnimationCurve curve;
+
+    public static bool end = false;
 
     
 
@@ -34,8 +38,23 @@ public class Panic : MonoBehaviour
         }
     }
 
+    public void ChangeNothing()
+    {
+        foreach (var item in _list)
+        {
+            item.transform.GetChild(0).GetComponent<Image>().DOColor(Color.white.WithAlpha(0), 1);
+            item.transform.GetChild(1).GetComponent<Image>().DOColor(Color.white.WithAlpha(0), 1);
+        }
+    }
+
     void Update()
     {
+
+        if (end)
+        {
+            ChangeNothing(); 
+            return;
+        }
 
         float per = PlayerHeartBeat.GetHeartBeat() / 180;
 

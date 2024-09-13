@@ -10,7 +10,7 @@ public class Screamer : MonoBehaviour
 
     [SerializeField] bool _active;
 
-    [SerializeField] float _timeToScream = 1.5f;
+    [SerializeField] float _timeToScream = 2f;
     float _timerScream = 0;
 
     bool _scream = false;
@@ -88,15 +88,17 @@ public class Screamer : MonoBehaviour
                 }
             }
 
-            if (PlayerHeartBeat.GetHeartBeat() > 170 && _canChange)
+            if (PlayerHeartBeat.GetHeartBeat() > 160 && _canChange)
             {
                 _canChange = false;
-                _image.DOColor(_image.color.WithAlpha(1), 0.1f);
+                _image.color = Color.white;
                 _scream = true;
-                //_audioSource.Play();
+                _audioSource.Play();
 
                 PlayerController._end = true;
-                Debug.Log(PlayerController._end);
+                Panic.end = true;
+                HeartbeatUI.end = true;
+                //Debug.Log(PlayerController._end);
 
                 // JOUE LE SON
 
