@@ -63,6 +63,9 @@ public class Panic : MonoBehaviour
 
         //float value = Mathf.Clamp(PlayerHeartBeat.GetHeartBeat() / 400, 0, 1);
 
+
+        Debug.Log(value);
+
         ChangeColor(value);
 
     }
