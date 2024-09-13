@@ -19,11 +19,13 @@ public class CanvasManager : MonoBehaviour
     {
         _mainMenuCanvas.SetActive(true);
         _settingsCanvas.SetActive(false);
+        _settingsCanvas.GetComponentInParent<Canvas>().sortingOrder = 0;
         IsInMenu = false;
     }
 
     public void UpdateCanvas()
     {
+        _settingsCanvas.GetComponentInParent<Canvas>().sortingOrder = _settingsCanvas.activeSelf ? 0 : 1;
         _mainMenuCanvas.SetActive(!_mainMenuCanvas.activeSelf);
         _settingsCanvas.SetActive(!_settingsCanvas.activeSelf);
     }

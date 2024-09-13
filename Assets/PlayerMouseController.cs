@@ -39,31 +39,28 @@ public class PlayerMouseController : MonoBehaviour
             Debug.DrawRay(transform.position, direction * range, Color.red);
             if (hit.collider != null)
             {
-                if (hit.collider.tag != "Wall")
+                switch (hit.collider.tag)
                 {
-                    switch (hit.collider.tag)
-                    {
-                        case "Monster":
-                            if (hit.collider.gameObject.transform.parent.name == "Bracken") 
-                            {
-                                StartCoroutine(FlashMonster(hit.collider.gameObject));
-                            }
+                    case "Monster":
+                        /*if (hit.collider.gameObject.transform.parent.name == "Bracken") 
+                        {
+                            StartCoroutine(FlashMonster(hit.collider.gameObject));
+                        }
 
-                            if (hit.collider.gameObject.transform.parent.name == "Coilhead") 
-                            {
-                                flashCoroutine = StartCoroutine(FlashMonster(hit.collider.gameObject));
-                                if (coroutine != null)
-                                {
-                                    StopCoroutine(coroutine);
-                                }
-                                coroutine = StartCoroutine(UnflashMonster(hit.collider.gameObject));
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                
+                        if (hit.collider.gameObject.transform.parent.name == "Coilhead") 
+                        {*/
+                        flashCoroutine = StartCoroutine(FlashMonster(hit.collider.gameObject));
+                        Debug.Log("Monster hit");
+                        if (coroutine != null)
+                        {
+                            StopCoroutine(coroutine);
+                        }
+                        coroutine = StartCoroutine(UnflashMonster(hit.collider.gameObject));
+                        //}
+                        break;
+                    default:
+                        break;
+                }                
             }
         }
     }
@@ -75,15 +72,14 @@ public class PlayerMouseController : MonoBehaviour
 
     IEnumerator FlashMonster(GameObject monster)
     {
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(0.01f);
         monster.GetComponentInParent<MonsterBehavior>().FlashMonster();
     }
 
     IEnumerator UnflashMonster(GameObject monster)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5);
         monster.GetComponentInParent<CoilHead>().UnflashMonster();
-        StopCoroutine(flashCoroutine);
     }
 
 }

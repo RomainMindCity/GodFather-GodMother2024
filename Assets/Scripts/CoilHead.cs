@@ -148,7 +148,6 @@ public class CoilHead : MonsterBehavior
 
     public override void FlashMonster(Vector3? playerPosition = null)
     {
-
         if (_state == StatesBehavior.NONE && _activatedByFlash)
         {
             _state = StatesBehavior.AI;
@@ -159,11 +158,8 @@ public class CoilHead : MonsterBehavior
         //_timerFlash = 0;
         _aiPath.maxSpeed = 0;
 
-
-
-
         // DEBUG 
-        Debug.Log("Coilhead Flashed ! ");
+        //Debug.Log("Coilhead Flashed ! ");
     }
 
     public override void UnflashMonster()
