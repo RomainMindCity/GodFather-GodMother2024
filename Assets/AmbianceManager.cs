@@ -18,7 +18,7 @@ public class AmbianceManager : MonoBehaviour
         for (float i = 0; i < 100; i++)
         {
             GetComponent<AudioSource>().volume = i/100;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
 
     }
