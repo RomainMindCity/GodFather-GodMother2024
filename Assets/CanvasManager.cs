@@ -10,6 +10,11 @@ public class CanvasManager : MonoBehaviour
     bool _isInMenu;
     public bool IsInMenu { get => _isInMenu; set => _isInMenu = value; }
 
+    public void DesacSettings()
+    {
+        _settingsCanvas.SetActive(false);
+    }
+
     public void CloseSettings()
     {
         _mainMenuCanvas.SetActive(true);
