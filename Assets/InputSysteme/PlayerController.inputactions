@@ -30,7 +30,7 @@
                 {
                     "name": "up",
                     "id": "fc70ac7a-96b8-4d90-b8c6-d22239c01569",
-                    "path": "<Keyboard>/W",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -52,7 +52,7 @@
                 {
                     "name": "left",
                     "id": "a9134095-280f-4426-be51-478df68f5c6d",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

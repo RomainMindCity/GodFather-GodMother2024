@@ -86,7 +86,7 @@ public class Screamer : MonoBehaviour
                 }
             }
 
-            if (PlayerHeartBeat.GetHeartBeat() > 160 && _canChange)
+            if (PlayerHeartBeat.GetHeartBeat() > 175 && _canChange)
             {
                 _canChange = false;
                 _image.color = Color.white;
