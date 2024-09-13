@@ -13,6 +13,8 @@ public class DoorManager : MonoBehaviour
 
     [SerializeField] private GameObject AudioSourcePrefab;
 
+    [SerializeField] private GameObject[] lights;
+
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")
@@ -28,6 +30,12 @@ public class DoorManager : MonoBehaviour
                     {
                         audioSource.clip = doorSoundUnlocked;
                         audioSource.Play();
+                        
+                        foreach (GameObject light in lights)
+                        {
+                            light.SetActive(true);
+                        }
+
                         Destroy(this.gameObject);
                     }
                     else
