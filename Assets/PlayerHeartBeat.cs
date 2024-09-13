@@ -51,10 +51,7 @@ public class PlayerHeartBeat : MonoBehaviour
         float waitTime = Mathf.Lerp(0.5f, 1.5f, normalizedDistance);
         _heartBeatImage.transform.DOShakeScale(0.25f, 0.1f, 10, 90, false);
         GameObject audioInstance = Instantiate(audioPrefab, transform.position, Quaternion.identity);
-        if (!audioInstance.GetComponent<AudioSource>().isPlaying)
-        {
-           Destroy(audioInstance);
-        }
+        Destroy(audioInstance, 1.5f);
         yield return new WaitForSeconds(waitTime);
 
         StartCoroutine(FindObjects());
