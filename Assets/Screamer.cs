@@ -24,7 +24,7 @@ public class Screamer : MonoBehaviour
         _image = GetComponent<Image>();
         _audioSource = GetComponent<AudioSource>();
 
-        //_image.color.WithAlpha(0.0f);
+        _image.color.WithAlpha(0.0f);
     }
 
     void Update()

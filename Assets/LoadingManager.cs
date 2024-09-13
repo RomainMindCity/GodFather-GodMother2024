@@ -233,10 +233,10 @@ public class LoadingManager : MonoBehaviour
                 foreach (var item in _listButtonsBackgrounds)
                 {
                     List<Image> images = new List<Image>(item.GetComponentsInChildren<Image>());
-                    //images[0].DOColor(Color.grey.WithAlpha(1f), 0.2f);//.SetLoops(-1);
-                    //images[0].DOFade(1, 0.2f);
-                    //images[1].DOColor(Color.black.WithAlpha(1f), 0.2f);//.SetLoops(-1);
-                    //images[1].DOFade(1, 0.2f);
+                    images[0].DOColor(Color.grey.WithAlpha(1f), 0.2f);//.SetLoops(-1);
+                    images[0].DOFade(1, 0.2f);
+                    images[1].DOColor(Color.black.WithAlpha(1f), 0.2f);//.SetLoops(-1);
+                    images[1].DOFade(1, 0.2f);
                 }
             }
             else
@@ -244,7 +244,7 @@ public class LoadingManager : MonoBehaviour
                 _listButtons[i].GetComponent<TextMeshProUGUI>().DOColor(Color.white, 0.2f);
                 foreach (var item in _listButtonsBackgrounds[i].GetComponentsInChildren<Image>())
                 {
-                    //item.DOColor(Color.white.WithAlpha(0.1f), 0.2f);
+                    item.DOColor(Color.white.WithAlpha(0.1f), 0.2f);
                 }
                 
             }
