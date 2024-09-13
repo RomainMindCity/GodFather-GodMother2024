@@ -22,6 +22,8 @@ public class QteAll : MonoBehaviour
 
     [SerializeField] QteRed _qteRed;
 
+    GameObject _qteYellow;
+
     [SerializeField] float _pixelPerFrame = 0.0001f;
 
     public Generator _gen;
@@ -30,7 +32,7 @@ public class QteAll : MonoBehaviour
     {
         _scrollBar = GetComponent<Scrollbar>();
         _imageBackScroll = GetComponent<Image>();
-
+        _qteYellow = transform.Find("Image2").gameObject;
         //Activate();
         DesacStart();
     }
@@ -40,19 +42,24 @@ public class QteAll : MonoBehaviour
         _imageBackScroll.color = Color.clear;
         _handle.GetComponent<Image>().color = Color.clear;
         _qteRed.gameObject.SetActive(false);
+        _qteYellow.SetActive(false);
     }
 
     public void Activate() 
     {
         _finished = false;
+
+        _qteRed.gameObject.SetActive(true);
+        _qteYellow.SetActive(true);
         _imageBackScroll.DOColor(Color.white, 0.5f).SetEase(Ease.InOutSine).OnComplete(() =>
         {
-            _handle.GetComponent<Image>().DOColor(Color.black, 0.1f).SetEase(Ease.InOutSine);
-            _active = true;
-            _scrollBar.value = 0;
-            _qteRed.gameObject.SetActive(true);
-            _qteRed._active = true;
             
+            _scrollBar.value = 0;
+            
+            _qteRed._active = true;
+            _handle.GetComponent<Image>().DOColor(Color.black, 0.1f).SetEase(Ease.InOutSine);
+
+            _active = true;
         });
 
     }
@@ -72,31 +79,16 @@ public class QteAll : MonoBehaviour
             _finished = true;
             _qteRed._active = true;
 
-            print(_scrollBar.value);
 
-            if (_scrollBar.value > 0.30 && _scrollBar.value < 0.6)
+            if (_gen != null)
             {
-                Debug.Log("Perfect");
-                if (_gen != null)
-                {
-                    _gen.AddFuel(20);
-                }
-                
-                // Do something gen
+                _gen.AddFuel(-15);
             }
-            else
-            {
-                Debug.Log("Fail");
-
-                if (_gen != null)
-                {
-                    _gen.AddFuel(-20);
-                }
-                //Do something gen
-            }
+            
 
             _imageBackScroll.DOColor(Color.clear, 0.5f).SetEase(Ease.InOutSine);
             _qteRed.gameObject.SetActive(false);
+            _qteYellow.SetActive(false);
             _handle.GetComponent<Image>().DOColor(Color.clear, 0.2f).SetEase(Ease.InOutSine);
         }
 
@@ -106,11 +98,17 @@ public class QteAll : MonoBehaviour
             _finished = true;
             _qteRed._active = true;
 
-            print(_scrollBar.value);
-
-            if (_scrollBar.value > 0.30 && _scrollBar.value < 0.6)
+            //print(_scrollBar.value);
+            if (_scrollBar.value > 0.41 && _scrollBar.value < 0.45)
             {
-                Debug.Log("Perfect");
+                if (_gen != null)
+                {
+                    _gen.AddFuel(10);
+                }
+            }
+            else if (_scrollBar.value >= 0.45 && _scrollBar.value < 0.668)
+            {
+                //Debug.Log("Perfect");
                 if (_gen != null)
                 {
                     _gen.AddFuel(5);
@@ -118,7 +116,7 @@ public class QteAll : MonoBehaviour
             }
             else
             {
-                Debug.Log("Fail");
+                //Debug.Log("Fail");
                 if (_gen != null)
                 {
                     _gen.AddFuel(-10);
@@ -136,6 +134,7 @@ public class QteAll : MonoBehaviour
 
             _imageBackScroll.DOColor(Color.clear, 0.5f).SetEase(Ease.InOutSine);
             _qteRed.gameObject.SetActive(false);
+            _qteYellow.SetActive(false);
             _handle.GetComponent<Image>().DOColor(Color.clear, 0.2f).SetEase(Ease.InOutSine);
         }
 
