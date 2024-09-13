@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     Vector2 _moveInput;
     bool _canWalk;
+    [SerializeField] private bool hasKey;
 
 
     const string  idle = "Idle";
@@ -19,10 +20,11 @@ public class PlayerController : MonoBehaviour
     const string back = "Back";
 
 
-    [SerializeField] bool _canBeStopped = false; // Pour le mode endless (oui je fais chier)
+    [SerializeField] bool _canBeStopped; // Pour le mode endless (oui je fais chier)
     string _currentAnimation;
 
     public CanvasManager CanvasManager { get => _canvasManager; set => _canvasManager = value; }
+    public bool HasKey { get => hasKey; set => hasKey = value; }
 
     void Start()
     {

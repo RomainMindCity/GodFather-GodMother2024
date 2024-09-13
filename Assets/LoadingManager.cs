@@ -12,9 +12,11 @@ public class LoadingManager : MonoBehaviour
 
     GameObject _playButton;
     GameObject _optionButton;
+    GameObject _playModButton;
     GameObject _quitButton;
 
     GameObject _playButtonBack;
+    GameObject _playModButtonBack;
     GameObject _optionButtonBack;
     GameObject _quitButtonBack;
 
@@ -37,18 +39,22 @@ public class LoadingManager : MonoBehaviour
 
         _center = GameObject.Find("Center");
         _playButton = GameObject.Find("Play");
+        _playModButton = GameObject.Find("PlayEaster");
         _optionButton = GameObject.Find("Options");
         _quitButton = GameObject.Find("Quit");
 
         _playButtonBack = GameObject.Find("PlayBack");
+        _playModButtonBack = GameObject.Find("PlayEasterBack");
         _optionButtonBack = GameObject.Find("OptionsBack");
         _quitButtonBack = GameObject.Find("QuitBack");
 
         _listButtons.Add(_playButton);
+        _listButtons.Add( _playModButton);
         _listButtons.Add(_optionButton);
         _listButtons.Add(_quitButton);
 
         _listButtonsBackgrounds.Add(_playButtonBack);
+        _listButtonsBackgrounds.Add(_playModButtonBack);
         _listButtonsBackgrounds.Add(_optionButtonBack);
         _listButtonsBackgrounds.Add(_quitButtonBack);
 
@@ -64,7 +70,7 @@ public class LoadingManager : MonoBehaviour
         
         gameObject.transform.DOScale(new Vector2(1.0f, 1.0f), duration);
         gameObject.transform.DORotate(new Vector3(0, 0, 0), duration);
-        gameObject.transform.DOMove(new Vector2(_center.transform.position.x/2f , _center.transform.position.y - (i * 20) - moreSize), duration).SetEase(Ease.OutCubic);
+        gameObject.transform.DOMove(new Vector2(_center.transform.position.x/3f , _center.transform.position.y - (i * 60) - moreSize), duration).SetEase(Ease.OutCubic);
     
     }
 
@@ -80,9 +86,9 @@ public class LoadingManager : MonoBehaviour
 
         float duration = 0.3f;
 
-        gameObject.transform.DOScale(new Vector2(1.5f, 1.5f), duration);
+        gameObject.transform.DOScale(new Vector2(1.2f, 1.2f), duration);
         gameObject.transform.DORotate(new Vector3(0, 0, 0), duration);
-        gameObject.transform.DOMove(new Vector2(_center.transform.position.x, _center.transform.position.y - (i * 20) - moreSize), duration).SetEase(Ease.OutCubic);
+        gameObject.transform.DOMove(new Vector2(_center.transform.position.x, _center.transform.position.y - (i * 60) - moreSize), duration).SetEase(Ease.OutCubic);
     
         
     }
@@ -104,11 +110,11 @@ public class LoadingManager : MonoBehaviour
                         if (currentIndex % 2 == 0)
                         {
                             currentCube.DOScale(new Vector2(1.5f,1.5f), 3f).SetLoops(-1, LoopType.Yoyo);
-                            currentCube.DORotate(new Vector3(0, 0, -360), 3.5f, RotateMode.FastBeyond360).SetLoops(-1);
+                            currentCube.DORotate(new Vector3(0, 0, -360), 3.5f, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Yoyo);
                         }
                         else
                         {
-                            currentCube.DORotate(new Vector3(0, 0, -360), 2.5f, RotateMode.FastBeyond360).SetLoops(-1);
+                            currentCube.DORotate(new Vector3(0, 0, -360), 2.5f, RotateMode.FastBeyond360).SetLoops(-1,LoopType.Yoyo);
                         }
                     }
                 });
@@ -170,9 +176,12 @@ public class LoadingManager : MonoBehaviour
                 Play();
                 break;
             case 1:
-                Options();
+                PlayEaster();
                 break;
             case 2:
+                Options();
+                break;
+            case 3:
                 Quit();
                 break;
         }
@@ -182,6 +191,13 @@ public class LoadingManager : MonoBehaviour
     {
         _playButton.GetComponent<TextMeshProUGUI>().DOColor(Color.black, 0.2f);
         SceneManager.LoadScene("MainScene");
+    }
+
+    void PlayEaster()
+    {
+        _playModButton.GetComponent<TextMeshProUGUI>().DOColor(Color.black, 0.2f);
+        SceneManager.LoadScene("DBDMode");
+
     }
 
     void Options()
@@ -218,9 +234,9 @@ public class LoadingManager : MonoBehaviour
                 {
                     List<Image> images = new List<Image>(item.GetComponentsInChildren<Image>());
                     images[0].DOColor(Color.grey.WithAlpha(1f), 0.2f);//.SetLoops(-1);
-                    //images[0].DOFade(1, 0.2f);
+                    images[0].DOFade(1, 0.2f);
                     images[1].DOColor(Color.black.WithAlpha(1f), 0.2f);//.SetLoops(-1);
-                    //images[1].DOFade(1, 0.2f);
+                    images[1].DOFade(1, 0.2f);
                 }
             }
             else

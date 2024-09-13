@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using Unity.VisualScripting;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class Generator : MonoBehaviour
 {
@@ -52,7 +51,7 @@ public class Generator : MonoBehaviour
         _timerQteMax = UnityEngine.Random.Range(0.5f, 3f);
 
 
-        _slider = GetComponentsInChildren<UnityEngine.UI.Slider>()[0];
+        _slider = GetComponentsInChildren<Slider>()[0];
         if (_slider != null)
         {
             _slider.maxValue = _maxFuel;

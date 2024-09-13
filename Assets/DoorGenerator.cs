@@ -1,11 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+
+
 
 public class DoorGenerator : MonoBehaviour
 {
+
+
 
     SpriteRenderer _spriteRenderer;
     CircleCollider2D _circleCollider;
@@ -50,6 +55,14 @@ public class DoorGenerator : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player" && _toDesactivate <= 0)
+        {
+            SceneManager.LoadScene("LoadingScene");
+        }
+    }
+
     void Desactivate()
     {
         Debug.Log("Desactive");
@@ -58,7 +71,11 @@ public class DoorGenerator : MonoBehaviour
         if (_toDesactivate <= 0)
         {
             OnDoorOpened?.Invoke();
-            gameObject.SetActive(false);
+            _spriteRenderer.color = Color.white;
+
+
+            //gameObject.SetActive(false);
+
             //    _circleCollider.enabled = false;
             //    _spriteRenderer.color = Color.white;
 

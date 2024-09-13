@@ -1,8 +1,8 @@
 using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Screamer : MonoBehaviour
@@ -15,15 +15,25 @@ public class Screamer : MonoBehaviour
 
     bool _scream = false;
 
+    AudioSource _audioSource;
+
     Image _image;
 
     bool _canChange = true;
 
     void Start()
     {
-        _image = GetComponent<Image>(); 
+        _image = GetComponent<Image>();
+        _audioSource = GetComponent<AudioSource>();
 
         _image.color.WithAlpha(0.0f);
+    }
+
+    IEnumerator _afterScream()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        SceneManager.LoadScene("LoadingScene");
     }
 
     void Update()
@@ -40,6 +50,9 @@ public class Screamer : MonoBehaviour
                     _scream = false;
                     _image.DOColor(Color.black, 0.1f);
 
+
+                    _afterScream();
+
                     // RENVOYER AU MENU
                 }
             }
@@ -49,7 +62,8 @@ public class Screamer : MonoBehaviour
                 _canChange = false;
                 _image.DOColor(_image.color.WithAlpha(1), 0.1f);
                 _scream = true;
-
+                _audioSource.Play();
+                
                 // JOUE LE SON
 
                 //_image.DOColor(_image.color.WithAlpha(0.5f), 0.2f).OnComplete(
@@ -59,7 +73,7 @@ public class Screamer : MonoBehaviour
             }
             else if (PlayerHeartBeat.GetHeartBeat() < 150)
             {
-                _image.color = Color.white.WithAlpha(0);
+                //_image.color = Color.white.WithAlpha(0);
             }
         }
     }

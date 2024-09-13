@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 7accaf68a72d6e244abf7c9697912897
+  - enabled: 1
+    path: Assets/Scenes/DBDMode.unity
+    guid: 6298b81953776aa47b04791864252ea6
   m_configObjects: {}
