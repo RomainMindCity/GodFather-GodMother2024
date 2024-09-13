@@ -28,11 +28,19 @@ public class QteAll : MonoBehaviour
 
     public Generator _gen;
 
+    AudioSource _audioSuccess;
+    AudioSource _audioAppear;
+
     private void Start()
     {
         _scrollBar = GetComponent<Scrollbar>();
         _imageBackScroll = GetComponent<Image>();
         _qteYellow = transform.Find("Image2").gameObject;
+
+        _audioSuccess = transform.Find("QTESuccess").GetComponent<AudioSource>();
+        _audioAppear = transform.Find("QTEAppear").GetComponent<AudioSource>();
+
+
         //Activate();
         DesacStart();
     }
@@ -48,6 +56,7 @@ public class QteAll : MonoBehaviour
     public void Activate() 
     {
         _finished = false;
+        _audioAppear.Play();
 
         _qteRed.gameObject.SetActive(true);
         _qteYellow.SetActive(true);
@@ -101,6 +110,7 @@ public class QteAll : MonoBehaviour
             //print(_scrollBar.value);
             if (_scrollBar.value > 0.40 && _scrollBar.value < 0.45)
             {
+                _audioSuccess.Play();
                 if (_gen != null)
                 {
                     _gen.AddFuel(10);
@@ -108,6 +118,7 @@ public class QteAll : MonoBehaviour
             }
             else if (_scrollBar.value >= 0.45 && _scrollBar.value < 0.668)
             {
+                _audioSuccess.Play();
                 //Debug.Log("Perfect");
                 if (_gen != null)
                 {
