@@ -88,13 +88,16 @@ public class Screamer : MonoBehaviour
                 }
             }
 
-            if (PlayerHeartBeat.GetHeartBeat() > 160 && _canChange)
+            if (PlayerHeartBeat.GetHeartBeat() > 170 && _canChange)
             {
                 _canChange = false;
                 _image.DOColor(_image.color.WithAlpha(1), 0.1f);
                 _scream = true;
-                _audioSource.Play();
-                
+                //_audioSource.Play();
+
+                PlayerController._end = true;
+                Debug.Log(PlayerController._end);
+
                 // JOUE LE SON
 
                 //_image.DOColor(_image.color.WithAlpha(0.5f), 0.2f).OnComplete(

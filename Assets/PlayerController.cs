@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool hasKey;
 
 
+    public static bool _end = false;
+
     const string  idle = "Idle";
     const string front = "Front";
     const string left = "Left";
@@ -35,6 +37,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (_end) return;
+
         //Cursor.lockState = _canvasManager.IsInMenu ? CursorLockMode.None : CursorLockMode.Locked;
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
@@ -55,8 +59,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnMovement(InputAction.CallbackContext context)
     {
+        if (_end) return;
+
         _moveInput = context.ReadValue<Vector2>();
-        Debug.Log(_moveInput);
+        //Debug.Log(_moveInput);
         switch (_moveInput.x)
         {
             case 1:
