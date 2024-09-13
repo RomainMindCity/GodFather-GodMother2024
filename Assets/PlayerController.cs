@@ -66,11 +66,13 @@ public class PlayerController : MonoBehaviour
         switch (_moveInput.x)
         {
             case 1:
-                GetComponent<SpriteRenderer>().flipX = false;
+            Debug.Log("left");
+                GetComponentInChildren<SpriteRenderer>().flipX = false;
                 ChangeAnimationState(left);
                 break;
             case -1:
-                GetComponent<SpriteRenderer>().flipX = true;
+                Debug.Log($"right");
+                GetComponentInChildren<SpriteRenderer>().flipX = true;
                 ChangeAnimationState(left);
                 break;
             default:
