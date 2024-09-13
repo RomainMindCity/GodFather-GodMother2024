@@ -56,15 +56,16 @@ public class PlayerController : MonoBehaviour
     public void OnMovement(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
-        Debug.Log(_moveInput);
         switch (_moveInput.x)
         {
             case 1:
-                GetComponent<SpriteRenderer>().flipX = false;
+            Debug.Log("left");
+                GetComponentInChildren<SpriteRenderer>().flipX = false;
                 ChangeAnimationState(left);
                 break;
             case -1:
-                GetComponent<SpriteRenderer>().flipX = true;
+                Debug.Log($"right");
+                GetComponentInChildren<SpriteRenderer>().flipX = true;
                 ChangeAnimationState(left);
                 break;
             default:
