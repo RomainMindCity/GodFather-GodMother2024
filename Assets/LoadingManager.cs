@@ -222,12 +222,14 @@ public class LoadingManager : MonoBehaviour
             SceneManager.LoadScene("MainScene");
         }
 
-        void PlayEaster()
+        public void PlayEaster()
         {
             _playModButton.GetComponent<TextMeshProUGUI>().DOColor(Color.black, 0.2f);
             SceneManager.LoadScene("DBDMode");
 
         }
+
+        
 
         void Options()
         {

@@ -1098,7 +1098,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1680097280}
         m_TargetAssemblyTypeName: LoadingManager, Assembly-CSharp
-        m_MethodName: ChangeScene
+        m_MethodName: PlayEaster
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
