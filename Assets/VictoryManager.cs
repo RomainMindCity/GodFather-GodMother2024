@@ -13,6 +13,7 @@ public class VictoryManager : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             victoryPanel.SetActive(true);
+            victoryPanel.GetComponent<Canvas>().sortingOrder = 1;
         }
     }
 
@@ -23,6 +24,7 @@ public class VictoryManager : MonoBehaviour
         PlayerController._end = false;
         HeartbeatUI.end = false;
         Panic.end = false;
+        victoryPanel.GetComponent<Canvas>().sortingOrder = 0;
     }
 
     public void MainMenu()
@@ -32,6 +34,7 @@ public class VictoryManager : MonoBehaviour
         PlayerController._end = false;
         HeartbeatUI.end = false;
         Panic.end = false;
+        victoryPanel.GetComponent<Canvas>().sortingOrder = 0;
     }
 
     public void Quit()
