@@ -1,6 +1,8 @@
 using DG.Tweening;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Screamer : MonoBehaviour
@@ -27,6 +29,13 @@ public class Screamer : MonoBehaviour
         _image.color.WithAlpha(0.0f);
     }
 
+    IEnumerator _afterScream()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        SceneManager.LoadScene("LoadingScene");
+    }
+
     void Update()
     {
         //Debug.Log(PlayerHeartBeat.GetHeartBeat());
@@ -40,6 +49,9 @@ public class Screamer : MonoBehaviour
                     _timerScream = 0;
                     _scream = false;
                     _image.DOColor(Color.black, 0.1f);
+
+
+                    _afterScream();
 
                     // RENVOYER AU MENU
                 }

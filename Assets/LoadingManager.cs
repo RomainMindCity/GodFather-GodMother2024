@@ -110,11 +110,11 @@ public class LoadingManager : MonoBehaviour
                         if (currentIndex % 2 == 0)
                         {
                             currentCube.DOScale(new Vector2(1.5f,1.5f), 3f).SetLoops(-1, LoopType.Yoyo);
-                            currentCube.DORotate(new Vector3(0, 0, -360), 3.5f, RotateMode.FastBeyond360).SetLoops(-1);
+                            currentCube.DORotate(new Vector3(0, 0, -360), 3.5f, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Yoyo);
                         }
                         else
                         {
-                            currentCube.DORotate(new Vector3(0, 0, -360), 2.5f, RotateMode.FastBeyond360).SetLoops(-1);
+                            currentCube.DORotate(new Vector3(0, 0, -360), 2.5f, RotateMode.FastBeyond360).SetLoops(-1,LoopType.Yoyo);
                         }
                     }
                 });
