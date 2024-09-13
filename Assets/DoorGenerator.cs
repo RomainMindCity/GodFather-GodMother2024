@@ -1,12 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
+
 public class DoorGenerator : MonoBehaviour
 {
+
+
 
     SpriteRenderer _spriteRenderer;
     CircleCollider2D _circleCollider;
