@@ -36,6 +36,7 @@ public class Screamer : MonoBehaviour
         _replayButton.gameObject.SetActive(false);
         _menuButton.gameObject.SetActive(false);
 
+        _scream = false;
         _image.color.WithAlpha(0.0f);
     }
 
@@ -52,9 +53,6 @@ public class Screamer : MonoBehaviour
 
         _replayButton.gameObject.SetActive(true);
         _menuButton.gameObject.SetActive(true);
-
-
-
         //SceneManager.LoadScene("LoadingScene");
     }
 

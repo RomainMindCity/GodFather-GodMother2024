@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class VictoryManager : MonoBehaviour
 {
@@ -12,22 +13,25 @@ public class VictoryManager : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             victoryPanel.SetActive(true);
-            Time.timeScale = 0;
         }
     }
 
     public void Restart()
     {
-        Time.timeScale = 1;
         victoryPanel.SetActive(false);
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        PlayerController._end = false;
+        HeartbeatUI.end = false;
+        Panic.end = false;
     }
 
     public void MainMenu()
     {
-        Time.timeScale = 1;
         victoryPanel.SetActive(false);
-        Application.LoadLevel("MainMenu");
+        SceneManager.LoadScene("LoadingScene");
+        PlayerController._end = false;
+        HeartbeatUI.end = false;
+        Panic.end = false;
     }
 
     public void Quit()

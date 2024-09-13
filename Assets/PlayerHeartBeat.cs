@@ -16,7 +16,9 @@ public class PlayerHeartBeat : MonoBehaviour
 
     void Start()
     {
+        _heartBeat = 60;
         StartCoroutine(FindObjects());
+
     }
 
     public static float GetHeartBeat()
@@ -26,6 +28,8 @@ public class PlayerHeartBeat : MonoBehaviour
 
     IEnumerator FindObjects()
     {
+        if (PlayerController._end) yield break;
+
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
         float distance = 0;
         float closestDistance = float.MaxValue;
